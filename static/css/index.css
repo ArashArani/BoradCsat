@@ -1,0 +1,343 @@
+@font-face {
+    font-family: IranSans;
+    src: url(../font/IRANSansX-Black.woff2) format('woff2');
+    font-weight: 900;
+}
+@font-face {
+    font-family: IranSans;
+    src: url(../font/IRANSansX-ExtraBold.woff2) format('woff2');
+    font-weight: 800;
+}
+@font-face {
+    font-family: IranSans;
+    src: url(../font/IRANSansX-Regular.woff2) format('woff2');
+    font-weight: 700;
+}
+@font-face {
+    font-family: IranSans;
+    src: url(../font/IRANSansX-DemiBold.woff2) format('woff2');
+    font-weight: 600;
+}
+@font-face {
+    font-family: IranSans;
+    src: url(../font/IRANSansX-Medium.woff2) format('woff2');
+    font-weight: 500;
+}
+@font-face {
+    font-family: IranSans;
+    src: url(../font/IRANSansX-Light.woff2) format('woff2');
+    font-weight: 400;
+}
+@font-face {
+    font-family: IranSans;
+    src: url(../font/IRANSansX-UltraLight.woff2) format('woff2');
+    font-weight: 300;
+}
+@font-face {
+    font-family: IranSans;
+    src: url(../font/IRANSansX-Thin.woff2) format('woff2');
+    font-weight: 200;
+}
+
+body,*,html{
+    
+    padding: 0;
+    margin: 0;
+    font-family: IranSans !important ;
+    transition: ease-in-out 400ms;
+    text-decoration: none;
+    box-sizing: border-box;
+
+
+
+}
+:root{
+  --color-blue: #6CB5E0;
+  --color-pink: #F09BAE;
+  --color-black: #151416;
+  --color-white: #FFFFFF;
+  --color-gray: #DADADA;
+}
+
+input,input::placeholder{
+    font-family: IranSans;
+  }
+  
+.admin{
+  background-color: var(--color-gray);
+}
+  h1, .h1 { 
+    font-size: 2rem;
+    font-weight: 900; /* بسیار پررنگ */
+  }
+  
+  h2, .h2 { 
+    font-size: 1.75rem;
+    font-weight: 800; /* پررنگ */
+  }
+  
+  h3, .h3 { 
+    font-size: 1.5rem;
+    font-weight: 700; /* پررنگ */
+  }
+  
+  h4, .h4 { 
+    font-size: 1.25rem;
+    font-weight: 600; /* نیمه پررنگ */
+  }
+  
+  h5, .h5 { 
+    font-size: 1rem;
+    font-weight: 500; /* متوسط */
+  }
+  
+  h6, .h6 { 
+    font-size: .75rem;
+    font-weight: 400; /* نرمال */
+  }
+  
+  .h7 { 
+    font-size: 0.5rem;
+    font-weight: 300; /* نازک */
+  }
+  
+  .h8 { 
+    font-size: 0.25rem;
+    font-weight: 200; /* بسیار نازک */
+  }
+  
+  p { 
+    font-size: .5rem;
+    font-weight: normal; /* نرمال */
+  }
+  .header {
+    position:relative;
+    text-align:center;
+    background: linear-gradient(60deg, var(--color-red) 0%, var(--color-black) 100%);
+    color:var(--color-white);
+  }
+ 
+  
+  .inner-header {
+    height:10vh;
+    width:100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .flex { /*Flexbox for containers*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .waves {
+    position:relative;
+    width: 100%;
+    height:15vh;
+    margin-bottom:-7px; /*Fix for safari gap*/
+    min-height:100px;
+    max-height:150px;
+  }
+  
+  .content {
+    position:relative;
+    height:20vh;
+    text-align:center;
+    background-color: white;
+  }
+  
+  /* Animation */
+  
+  .parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+  }
+  .parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+  }
+  .parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+  }
+  .parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+  }
+  .parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+  }
+  @keyframes move-forever {
+    0% {
+     transform: translate3d(-90px,0,0);
+    }
+    100% { 
+      transform: translate3d(85px,0,0);
+    }
+  }
+
+
+
+  body {
+    background-color:var(--color-black);
+}
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.section-nav{
+    display: flex;
+    width: 100%;
+    height: 100px;
+    border-radius: 12px;
+    a{
+      color: var(--color-blue);
+    }
+    a:hover{
+      color: var(--color-pink);
+    }
+}
+.right-nav {
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  margin-top: 25px;
+}
+.left-nav {
+  display: flex;
+  justify-content: center;
+  width: 75%;
+  ul{
+    display: flex;
+    width: 100%;
+    li{
+      width: calc(25% - 2rem);
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      font-weight: 600;
+      a{
+        color: var(--color-white);
+      }
+      a:hover {
+        color: var(--color-pink);
+      }
+    }
+  }
+}
+.banner{
+  display: flex;
+  width: calc(100% - 2rem);
+}
+.left-banner {
+  display: flex;
+  width: 40%;
+  img {
+    width: 100%;
+  }
+}
+.right-banner{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  h1 , h4 , h5{
+    color: var(--color-white);
+  }
+}
+.right-banner-btn{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 2rem;
+  justify-content: center;
+}
+.right-banner-btn-div{
+  width: calc(10% - 2rem);
+}
+.b-btn{
+  width: 100%;
+  display: flex;
+  background-color: var(--color-blue);
+  justify-content: center;
+  padding: 8px 0;
+  border-radius: 12px;
+  color: var(--color-black);
+  border: 2px solid var(--color-blue);
+}
+.p-btn{
+  display: flex;
+  width: 100%;
+  background-color: var(--color-pink);
+  justify-content: center;
+  padding: 8px 0;
+  border-radius: 12px;
+  color: var(--color-black);
+  border:  2px solid var(--color-pink);
+}
+.p-btn:hover{
+ color: var(--color-pink);
+  background-color:var(--color-black) ;
+  border: solid 2px;
+}
+
+.b-btn:hover{
+  color: var(--color-blue);
+  background-color: var(--color-black);
+  border: solid 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1025px){
+    h1, .h1 { font-size: 1.5rem; }
+  h2, .h2 { font-size: 1.25rem; }
+  h3, .h3 { font-size: 1rem; }
+  h4, .h4 { font-size: 0.75rem; }
+  h5, .h5 { font-size: 0.5rem; }
+  h6, .h6 { font-size: 0.5rem; }
+  .h7 { font-size: 0.3rem; }
+  .h8 { font-size: 0.25rem; }
+  p { font-size: 0.6rem; }
+  .waves {
+    height:40px;
+    min-height:40px;
+  }
+  .admin{
+    min-height: 250vh;
+  }
+}
