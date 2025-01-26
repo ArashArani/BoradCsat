@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>پنل مدیریت</title>
+{% endblock %}
+{% block body %}
+<body class="admin">
+    <div class="admin">
+
+        <div class="panel">
+            <div class="sidebar" id="SideBar">
+                <div class="sidebar-top dashboard-active">
+                    <h1 class="h5">پنل مدیریت</h1>
+                    <img id="AdminMnu" src="/static/covers/img/icons8-arrow-50.png" alt="">
+                    <img src="/static/covers/img/icons8-arrow-50.png" id="AdminX" alt="">
+                </div>
+        
+                <div class="sidebar-body">
+                    <ul>
+                        <li class="side-active">
+                            <a href="/admin/dashboard">
+                                <img src="/static/covers/img/home-blue.png" alt=""> 
+                                <h5>خانه</h5>
+                            </a>
+                        </li>
+                        <li class="side-active-bottom"><a href="/admin/dashboard/products"><img src="/static/covers/img/bag-white.png" alt="">  <h5>محصولات</h5></a></li>
+                        <li><a href="/admin/dashboard/category"><img src="/static/covers/img/folder-white.png" alt="">  <h5>دسته بندی ها</h5></a></li>
+    
+                        <li><a href="/admin/dashboard/carts"><img src="/static/covers/img/cart-white.png" alt="">  <h5>سفارشات</h5></a></li>
+                        <li><a href="/admin/dashboard/customers"><img src="/static/covers/img/customer-white.png" alt="">  <h5>کاربران</h5></a></li>
+                        <li><a href="/admin/dashboard/cards"><img src="/static/covers/img/card-white.png" alt="">  <h5>کارت بانکی</h5></a></li>
+                        <li><a href="/admin/dashboard/campain"><img src="/static/covers/img/megaphone-white.png" alt="">  <h5>کمپین</h5></a></li>
+                    </ul>
+        
+                </div>
+                <div class="side-fix">
+        
+                </div>
+        
+            </div>
+            <div class="panel-content" id="PanelContent">
+                <div class="panel-content-top">
+                    <h2>سلام رئیس ، خوش اومدی</h2>
+                    <h6>اینجا همه اطلاعات رو داریم .</h6>
+        
+                </div>
+                <div class="panel-content-box">
+                    <div class="content-box ">
+                        <div class="content-box-top">
+                            <h4>سفارشات</h4> 
+                        </div>                       
+                        <div class="content-box-body">
+                            <h2>{{paid_count}}</h2>
+                        </div>
+        
+                        <div class="content-box-down">
+                            <a href="/admin/dashboard/verify-carts" class="w-btn h6">مشاهده</a>
+                        </div>
+                    </div>
+                    <div class="content-box ">
+                        <div class="content-box-top">
+                            <h4>محصولات</h4> 
+                        </div>                       
+                        <div class="content-box-body">
+                            <h2>{{product_count}}</h2>
+                        </div>
+        
+                        <div class="content-box-down">
+                            <a href="/admin/dashboard/products" class="w-btn h6">مشاهده</a>
+                        </div>
+                    </div>            
+                    
+                    <div class="content-box ">
+                        <div class="content-box-top">
+                            <h4>کاربران</h4> 
+                        </div>                       
+                        <div class="content-box-body">
+                            <h2>{{user_count}}</h2>
+                        </div>
+        
+                        <div class="content-box-down">
+                            <a href="/admin/dashboard/customers" class="w-btn h6">مشاهده</a>
+                        </div>
+                    </div>
+                    <div class="content-box ">
+                        <div class="content-box-top">
+                            <h4 >کل فروش</h4> 
+                        </div>                       
+                        <div class="content-box-body">
+                            <h3 class="price-usd">{{total_sales}}</h3>
+                        </div>
+        
+                        <div class="content-box-down">
+                            <a href="/admin/dashboard/products" class="w-btn h6">مشاهده</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-table-box">
+                    <div class="table-div">
+                        <div class="table-info">
+                            <div class="table-info-h">
+        
+                                <h3>سفارشات اخیر</h3>
+                            </div>
+                            <div class="table-info-btn">
+        
+                                <a href="/admin/dashboard/carts" class="w-btn h6">مشاهده همه</a>
+                            </div>
+                        </div>
+                        <div class="table-content">
+                            <table>
+                                <tbody>
+                                    {% for p in cart_list %}
+                                    <tr>
+                                        <td class="td-40 h6">{{p.user.email}}</td>
+                                        <td class="price-usd h6 td-30">{{p.final_price()}}</td>
+                                        
+                                        <td class="td-20 h6 td-status {{p.status}}">{{p.status}}</td>
+                        
+                                        <td class="td-20 h6 td-edit"><a href="{{ url_for('admin.edit_carts' , id=p.id ) }}" class="edit">Edit</a></td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+        
+                        </div>
+                        
+                    </div>
+                    <div class="table-div">
+                        <div class="table-info">
+                            <div class="table-info-h">
+        
+                                <h3>برترین مشتری ها</h3>
+                            </div>
+                            <div class="table-info-btn">
+        
+                                <a href="/admin/dashboard/customers" class="w-btn h6">مشاهده همه</a>
+                            </div>
+                        </div>
+                        <div class="table-content">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th class="td-40 h6 th-40">ایمیل</th>
+                                        <th class="td-20 h6">تعداد خرید</th>
+                                        <th class="td-30 h6">مبلغ پرداختی</th>
+                                        <th class="td-20 h6">اطلاعات</th>
+                                    </tr>
+                                    {% for user in top_users %}
+                                    <tr>
+                                        <td class="td-40 h6">{{user.user_mail}}</td>
+                                        <td class=" td-20 h6">{{user.purchase_count }}</td>
+                                        <td class=" td-30 h6 price-usd Verify td-status">{{user.total_spent }}</td>
+                                        
+                        
+                                        <td class="td-20 td-edit"><a href="/admin/dashboard/customers/{{user.id}}" class="edit h6">اطلاعات</a></td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+        
+                        </div>
+                        
+                    </div>
+        
+                </div>
+                <div class="panel-table-box">
+                    <div class="table-div table-100">
+                        <div class="table-info">
+                            <div class="table-info-h">
+        
+                                <h3>بیشترین فروش</h3>
+                            </div>
+                            <div class="table-info-btn">
+        
+                                <a href="/admin/dashboard/products" class="w-btn h6">مشاهده همه</a>
+                            </div>
+                        </div>
+                        <div class="table-content">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th class="td-40 h6 th-40">نام</th>
+                                        <th class="td-20 h6">تعداد </th>
+                                        <th class="td-30 h6">کل مبلغ</th>
+                                        <th class="td-20 h6">اطلاعات</th>
+                                    </tr>
+                                   
+                                    {% for product in top_products %}
+                                    <tr>
+                                        <td class="td-40 h6">{{product.product_name}}</td>
+                                        <td class=" td-20 h6">{{product.total_sold }}</td>
+                                        <td class=" td-30 h6 price-usd Verify td-status">{{product.total_revenue }}</td>
+                                        
+                        
+                                        <td class="td-20 td-edit"><a href="{{ url_for('admin.edit_products' , id=product.product_id ) }}" class="edit h6">تغییر</a></td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+        
+                        </div>
+                        
+                    </div>
+        
+                </div>
+               
+        
+            </div>
+        
+        </div>
+    </div>
+</body>
+
+
+{% endblock %}

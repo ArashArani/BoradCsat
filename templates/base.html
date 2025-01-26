@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    {% block header %}
+    {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#923333" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/eggy.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/progressbar.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/theme.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css">
+
+    
+</head>
+{% block body %} 
+
+{% endblock %}
+<script src="/static/js/index.js"></script>
+
+
+<script type="module">
+    
+    import { Eggy } from '{{url_for('static',filename='js/eggy.js')}}' ;
+    {% for m , category  in get_flashed_messages(with_categories=true) %}
+        let messageType = 'info';  // Set a default type
+            if ('{{ category }}' === 'success') {
+                messageType = 'success';
+            } else if ('{{ category }}' === 'error') {
+                messageType = 'error';
+            }
+        await Eggy({
+            title:  ' اعلان ',
+            message:  '{{m}}',
+            type: messageType ,
+            duration: 5000,
+            });        
+    {% endfor %}
+</script>  
+
+
+</html>

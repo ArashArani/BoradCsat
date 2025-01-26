@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>Admin Panel</title>
+{% endblock %}
+{% block body %}
+<body>
+    
+    {% include 'parts/wave.html' %}
+        <div class="login-div">
+            <div class="login-top">
+                <div class="login-img-div">
+    
+                    <h2>ورود به پنل</h2>
+                </div>
+    
+            </div>
+            <div class="login-body">
+                <form  method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="login-div-input">
+                        <label for="username" class="h6">نام کاربری</label>
+                        <input type="text" name="username" class="h5">
+    
+                    </div>
+                    <div class="login-div-input password-div">
+                        <label for="username" class="h6">رمز عبور</label>
+                        <input type="password" class="password-input h5" name="password">
+                        <img class="show-pass input-img left " id="show-pass" src="/static/covers/img/eye.png" alt="">
+                        <img class="no-show input-img left " id="no-show" src="/static/covers/img/closed-eye.png" style="display: none;" alt="">
+    
+                    </div>
+                    <div class="login-div-input">
+                        <label for="username" class="h6">کد تایید</label>
+                        <input type="tel" class="h5" dir="rtl" name="verify">
+    
+                    </div>
+                    <div class="login-div-submit">
+                        <input type="submit" class="r-btn h4" value="ورود">
+    
+                    </div>
+                </form>
+    
+            </div>
+    
+        </div>
+</body>
+{% endblock %}
