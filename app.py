@@ -15,7 +15,6 @@ from blueprints.admin import app as admin
 
 from blueprints.general import app as general
 
-from blueprints.user import app as user
 
 from models.user import User
 
@@ -27,7 +26,6 @@ from extentions import db , mail
 
 app = Flask(__name__)
 
-app.register_blueprint(user)
 
 app.register_blueprint(admin)
 
