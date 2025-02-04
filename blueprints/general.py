@@ -37,6 +37,16 @@ def product_info(name):
     related_products = Product.query.filter(Product.category_id == category.id).filter(Product.id != product.id).filter(Product.active==1).filter(Product.stock > 0).order_by(func.random()).limit(4).all()
     return render_template('product-info.html', related_products = related_products,product = product , category = category)
 
+
+
+
+@app.route('/course-info')
+def course_info():
+    return render_template('course-info.html')
+
+
+
+
 @app.route('/category/<name>')
 def category(name):
     page = request.args.get('page', 1, type=int)

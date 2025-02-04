@@ -4,38 +4,8 @@
 {% endblock %}
 {% block body %}
 <body>
-    <header class="container">
-        <div class="section-nav">
-            <div class="right-nav">
-                <a href="" class="h2" >خانه برودکست</a>
-            </div>
-            <div class="left-nav">
-                <ul>
-                    <li class="h5"><a href="">دوره ها</a></li>
-                    <li class="h5"><a href="">بلاگ ها</a></li>
-                    <li class="h5"><a href="">سبد خرید</a></li>
-                    <li class="h5"><a href="">پروفایل</a></li>
-                </ul>
-                
-            </div>
-        </div>
-    </header>
-    <div class="banner">
-        <div class="right-banner">
-            <div class="right-banner-title"><h1>خانه برودکست ایران</h1></div>
-            <div class="right-banner-info"><h4> اولین وبسایت حرفه ای آموزشی برودکست ایران</h4></div>
-            <div class="right-banner-text"><h5> با ما قراره توی دنیای برودکست سفر کنی پس با ما همراه باش!</h5></div>
-            <div class="right-banner-btn">
-                <div class="right-banner-btn-div"><a href="#" class="p-btn h5">شروع کنیم</a></div>
-                <div class="right-banner-btn-div"><a href="#" class="b-btn h5">بیشتر بدانیم!</a></div>
-            </div>
-        </div>
-        <div class="left-banner">
-            <div class="banner-img">
-                <img src="/static/logo_p.png" alt="">
-            </div>
-        </div>
-    </div>
+    {% include 'parts/header.html'   %}
+    {% include 'parts/banner.html'   %}
     <hr class="hr">
     <div class="course-title"><a href="#" class="course-title-a h2">  دوره های برودکست </a></div> 
     <section class="course-box">
@@ -47,7 +17,7 @@
                 <span class="course-cart-title h4">دوره جامع تنظیم دوربین استودیویی</span>
                 <span class="course-cart-text">توضیحات</span>
                 <span class="course-cart-price">2.900.000 تومان  </span>
-                <div class="course-cart-btn"><a href="#" class="b-btn h5">مشاهده دوره</a></div>
+                <div class="course-cart-btn"><a href="/course-info" class="b-btn h5">مشاهده دوره</a></div>
              </div>
             </div>
         </article>
@@ -59,7 +29,7 @@
                <span class="course-cart-title h4">دوره جامع میکسر تصویر</span>
                <span class="course-cart-text">توضیحات</span>
                <span class="course-cart-price">  3.900.000 تومان</span>
-               <div class="course-cart-btn"><a href="#" class="b-btn h5">مشاهده دوره</a></div>
+               <div class="course-cart-btn"><a href="/course-info" class="b-btn h5">مشاهده دوره</a></div>
             </div>
            </div>
        </article>
