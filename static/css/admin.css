@@ -113,7 +113,7 @@
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 .admin-sidebar-body-link {
   border-radius: 5px;
@@ -125,172 +125,177 @@
     gap: 20px;
     padding: 0.5rem 0;
     color: var(--admin-color-gray) !important;
-    img{
+    img {
       width: 20px;
       margin-right: 15px;
     }
   }
 }
-.sidebar-active , .admin-sidebar-body-link:hover{
+.sidebar-active,
+.admin-sidebar-body-link:hover {
   background-color: var(--admin-color-black-op);
 }
 
-.admin-sidebar-down{
+.admin-sidebar-down {
   margin: auto auto 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: calc(100% - 2rem);
-
 }
 
-
-
-.admin-sidebar-down-account{
+.admin-sidebar-down-account {
   display: flex;
   width: 100%;
 }
-.admin-sidebar-down-account-img{
+.admin-sidebar-down-account-img {
   border-radius: 50%;
   overflow: hidden;
   padding: 10px;
-  img{
+  img {
     border-radius: 50%;
     width: 40px;
   }
 }
-.admin-sidebar-down-account-role{
+.admin-sidebar-down-account-role {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  color: var(--admin-color-gray);
 }
 
-.admin-content{
+.admin-content {
   width: calc(80% - 1rem);
   display: flex;
   flex-direction: column;
   margin: 0 auto 0 1rem;
 }
-.admin-content-top{
+.admin-content-top {
   width: 100%;
   display: flex;
-  margin: 1rem 0 ;
+  margin: 1rem 0;
   align-items: center;
 }
-.admin-content-top-name{
+.admin-content-top-name {
   width: calc(20% - 1rem);
   margin: 0 0 0 auto;
-  h1 , h4{
+  h1,
+  h4 {
     color: var(--admin-color-black) !important;
   }
+  h4{
+    display: none;
+  }
 }
-.admin-content-top-date{
+.admin-content-top-date {
   width: calc(20% - 1rem);
   margin: 0 auto 0 0;
   text-align: center;
-  h4{
+  h4 {
     color: var(--admin-color-black) !important;
   }
 }
-.admin-content-top-search{
+.admin-content-top-search {
   width: calc(60% - 1rem);
   margin: auto;
   display: flex;
-  form{
+  form {
     width: 100%;
     position: relative;
     display: flex;
-    input{
+    input {
       width: 100%;
-      padding: 1rem ;
+      padding: 1rem;
       border-radius: 5px;
       border: none;
       background-color: var(--admin-color-white);
     }
-    input:focus{
+    input:focus {
       outline: none;
     }
-    button{
+    button {
       position: absolute;
       left: 2%;
       top: 25%;
       cursor: pointer;
       background-color: transparent;
       border: none;
-      img{
+      img {
         width: 25px;
       }
     }
   }
 }
-.admin-content-box{
+.admin-content-box {
   display: flex;
   width: 100%;
   margin: 1rem 0;
   gap: 1rem;
   justify-content: space-between;
 }
-.admin-content-box-div{
+.admin-content-box-div {
   width: calc(25% - 1rem);
   display: flex;
   flex-direction: column;
   background-color: var(--admin-color-white);
   border-radius: 5px;
 }
-.admin-content-box-div-top{
+.admin-content-box-div-top {
   display: flex;
   align-items: center;
   margin: 1rem auto;
   width: calc(100% - 2rem);
   justify-content: space-between;
-  h5 , h3 {
-
+  h5,
+  h3 {
     color: var(--admin-color-black-op);
   }
-  div{
+  div {
     padding: 7px;
     background-color: var(--admin-color-gray);
     display: flex;
     border-radius: 50%;
     aspect-ratio: 1;
-    img{
+    img {
       width: 20px;
     }
   }
 }
 
-.admin-content-box-div-body{
+.admin-content-box-div-body {
   display: flex;
   justify-content: center;
   margin: 1rem auto;
-  h3{
+  h3,
+  h4 {
     font-weight: 900;
     color: var(--admin-color-black-op);
   }
 }
-.admin-content-table{
+.admin-content-table {
   display: flex;
   width: 100%;
   gap: 1rem;
   justify-content: space-between;
 }
-.admin-content-table-div{
-  width: calc(50% - .5rem);
+.admin-content-table-div {
+  width: calc(50% - 0.5rem);
   border-radius: 5px;
   background-color: var(--admin-color-white);
 }
-.admin-content-table-div-top{
+.admin-content-table-div-top {
   width: calc(100% - 4rem);
   margin: 2rem auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  a , h4{
+  a,
+  h4 {
     color: var(--admin-color-black-op);
   }
 }
 
-.admin-content-table-div-body{
+.admin-content-table-div-body {
   width: calc(100% - 4rem);
   display: flex;
   flex-direction: column;
@@ -298,37 +303,35 @@
   margin: 2rem auto;
 }
 
-
-.admin-table-row{
+.admin-table-row {
   width: calc(100% - 2rem);
   display: flex;
   align-items: center;
+  margin: auto;
   justify-content: space-between;
 }
-.admin-table-row-data{
+.admin-table-row-data {
   width: fit-content;
   margin: auto;
-  h6 , a {
+  h6,
+  a {
     color: var(--admin-color-black-op);
   }
-  a::after{
+  a::after {
     content: "\002710";
   }
 }
-.admin-table-row-data-img{
+.admin-table-row-data-img {
   width: fit-content;
   border-radius: 50%;
   padding: 5px;
   overflow: hidden;
   aspect-ratio: 1;
-  img{
+  img {
     border-radius: 50%;
     width: 40px;
   }
 }
-
-
-
 
 .b-btn {
   width: 100%;
@@ -341,4 +344,90 @@
   border-radius: 5px;
   padding: 0.5rem 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1025px) {
+  .admin-sidebar {
+    width: calc(25% - 1rem);
+  }
+  .admin-content {
+    width: calc(75% - 1rem);
+  }
+  .admin-sidebar-top {
+    justify-content: center;
+    h2 {
+      display: none;
+    }
+  }
+  .admin-sidebar-body-link {
+    a {
+      justify-content: center;
+      h6 {
+        display: none;
+      }
+      img {
+        margin: 0;
+      }
+    }
+  }
+  .admin-sidebar-down-account-role {
+    display: none;
+  }
+  .admin-sidebar-down-account {
+    justify-content: center;
+  }
+  .admin-sidebar-down {
+    width: calc(100% - 1rem);
+  }
+  .admin-sidebar-down-account-img {
+    overflow: visible;
+  }
+  .admin-content-top {
+    flex-direction: column;
+  }
+  .admin-content-top-date {
+    display: none;
+  }
+  .admin-content-top-name {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .admin-content-top-search {
+    width: calc(100% );
+
+    margin: 1rem auto 0 auto;
+    form {
+      input {
+        padding: 0.5rem;
+      }
+      button {
+        img {
+          width: 15px;
+        }
+      }
+    }
+  }
+  .admin-content-box {
+    flex-wrap: wrap;
+  }
+  .admin-content-box-div {
+    width: calc(50% - 0.5rem);
+  }
+  .admin-content-table {
+    flex-direction: column;
+  }
+  .admin-content-table-div {
+    width: 100%;
+  }
+  .admin-content-table-div-body {
+    width: calc(100%);
+  }
+  .admin-table-row-data-img {
+    img {
+      border-radius: 50%;
+      width: 30px;
+    }
+  }
 }

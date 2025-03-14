@@ -7,7 +7,7 @@
     <div class="admin-page">
         <div class="admin-sidebar">
             <div class="admin-sidebar-top">
-                <img src="/static/covers/img/logo.png" alt="">
+                <img id="AdminLogo" src="/static/covers/img/logo.png" alt="">
                 <h2>خانه برودکست</h2>
             </div>
             <div class="admin-sidebar-body">
@@ -85,6 +85,7 @@
             <div class="admin-content-top">
                 <div class="admin-content-top-name">
                     <h1>داشبورد</h1>
+                    <h4>{{date}}</h4>
                 </div>
                 <div class="admin-content-top-search">
                     <form action="/admin/search">
@@ -105,7 +106,7 @@
                         </div>
                     </div>
                     <div class="admin-content-box-div-body">
-                        <h3>12,000,000 تومان</h3>
+                        <h4>12,000,000 تومان</h4>
                     </div>
                 </div>
                 <div class="admin-content-box-div">
@@ -190,23 +191,7 @@
             </div>
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
     </div>
-
-
-
-
-
 </body>
 
 {% endblock %}

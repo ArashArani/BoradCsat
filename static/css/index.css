@@ -47,8 +47,6 @@ html {
   font-family: IranSans !important ;
   transition: ease-in-out 400ms;
   text-decoration: none;
-  box-sizing: border-box;
-  color: var(--color-white);
 }
 :root {
   --color-blue: #6cb5e0;
