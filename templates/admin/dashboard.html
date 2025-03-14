@@ -1,215 +1,212 @@
 {% extends 'base.html' %}
 {% block header %}
-    <title>پنل مدیریت</title>
+    <title>داشبور ادمین</title>
 {% endblock %}
 {% block body %}
-<body class="admin">
-    <div class="admin">
+<body>
+    <div class="admin-page">
+        <div class="admin-sidebar">
+            <div class="admin-sidebar-top">
+                <img src="/static/covers/img/logo.png" alt="">
+                <h2>خانه برودکست</h2>
+            </div>
+            <div class="admin-sidebar-body">
+                <div class="admin-sidebar-body-link sidebar-active">
+                    <a href="/admin/dashboard">
+                        <img src="/static/covers/img/dashboard-b.png" alt="">
+                        <h6>داشبورد</h6>
 
-        <div class="panel">
-            <div class="sidebar" id="SideBar">
-                <div class="sidebar-top dashboard-active">
-                    <h1 class="h5">پنل مدیریت</h1>
-                    <img id="AdminMnu" src="/static/covers/img/icons8-arrow-50.png" alt="">
-                    <img src="/static/covers/img/icons8-arrow-50.png" id="AdminX" alt="">
+                    </a>
                 </div>
-        
-                <div class="sidebar-body">
-                    <ul>
-                        <li class="side-active">
-                            <a href="/admin/dashboard">
-                                <img src="/static/covers/img/home-blue.png" alt=""> 
-                                <h5>خانه</h5>
-                            </a>
-                        </li>
-                        <li class="side-active-bottom"><a href="/admin/dashboard/products"><img src="/static/covers/img/bag-white.png" alt="">  <h5>محصولات</h5></a></li>
-                        <li><a href="/admin/dashboard/category"><img src="/static/covers/img/folder-white.png" alt="">  <h5>دسته بندی ها</h5></a></li>
-    
-                        <li><a href="/admin/dashboard/carts"><img src="/static/covers/img/cart-white.png" alt="">  <h5>سفارشات</h5></a></li>
-                        <li><a href="/admin/dashboard/customers"><img src="/static/covers/img/customer-white.png" alt="">  <h5>کاربران</h5></a></li>
-                        <li><a href="/admin/dashboard/cards"><img src="/static/covers/img/card-white.png" alt="">  <h5>کارت بانکی</h5></a></li>
-                        <li><a href="/admin/dashboard/campain"><img src="/static/covers/img/megaphone-white.png" alt="">  <h5>کمپین</h5></a></li>
-                    </ul>
-        
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/courses">
+
+                        <img src="/static/covers/img/course-w.png" alt="">
+                        <h6>دوره ها</h6>
+                    </a>
                 </div>
-                <div class="side-fix">
-        
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/experiences">
+
+                        <img src="/static/covers/img/experience-w.png" alt="">
+                        <h6>تجربه ها</h6>
+
+                    </a>
                 </div>
-        
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/carts">
+
+                        <img src="/static/covers/img/cart-w.png" alt="">
+                        <h6>سفارشات</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/users">
+
+                        <img src="/static/covers/img/user-w.png" alt="">
+                        <h6>کاربران</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/blogs">
+
+                        <img src="/static/covers/img/blog-w.png" alt="">
+                        <h6>بلاگ ها</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/consults">
+
+                        <img src="/static/covers/img/chat-w.png" alt="">
+                        <h6>مشاوره ها</h6>
+                    </a>
+                </div>
             </div>
-            <div class="panel-content" id="PanelContent">
-                <div class="panel-content-top">
-                    <h2>سلام رئیس ، خوش اومدی</h2>
-                    <h6>اینجا همه اطلاعات رو داریم .</h6>
-        
+            <div class="admin-sidebar-down">
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/logout">
+
+                        <img src="/static/covers/img/logout-w.png" alt="">
+                        <h6>خروج از حساب</h6>
+                    </a>
                 </div>
-                <div class="panel-content-box">
-                    <div class="content-box ">
-                        <div class="content-box-top">
-                            <h4>سفارشات</h4> 
-                        </div>                       
-                        <div class="content-box-body">
-                            <h2>{{paid_count}}</h2>
-                        </div>
-        
-                        <div class="content-box-down">
-                            <a href="/admin/dashboard/verify-carts" class="w-btn h6">مشاهده</a>
-                        </div>
+                <div class="admin-sidebar-down-account">
+                    <div class="admin-sidebar-down-account-img">
+                        <img src="/static/covers/img/masoud.jpg" alt="">
                     </div>
-                    <div class="content-box ">
-                        <div class="content-box-top">
-                            <h4>محصولات</h4> 
-                        </div>                       
-                        <div class="content-box-body">
-                            <h2>{{product_count}}</h2>
-                        </div>
-        
-                        <div class="content-box-down">
-                            <a href="/admin/dashboard/products" class="w-btn h6">مشاهده</a>
-                        </div>
-                    </div>            
-                    
-                    <div class="content-box ">
-                        <div class="content-box-top">
-                            <h4>کاربران</h4> 
-                        </div>                       
-                        <div class="content-box-body">
-                            <h2>{{user_count}}</h2>
-                        </div>
-        
-                        <div class="content-box-down">
-                            <a href="/admin/dashboard/customers" class="w-btn h6">مشاهده</a>
-                        </div>
-                    </div>
-                    <div class="content-box ">
-                        <div class="content-box-top">
-                            <h4 >کل فروش</h4> 
-                        </div>                       
-                        <div class="content-box-body">
-                            <h3 class="price-usd">{{total_sales}}</h3>
-                        </div>
-        
-                        <div class="content-box-down">
-                            <a href="/admin/dashboard/products" class="w-btn h6">مشاهده</a>
-                        </div>
+                    <div class="admin-sidebar-down-account-role">
+                        <h4>مسعود مهدیه آرانی</h4>
+                        <h6>مدیر مجموعه</h6>
                     </div>
                 </div>
-                <div class="panel-table-box">
-                    <div class="table-div">
-                        <div class="table-info">
-                            <div class="table-info-h">
-        
-                                <h3>سفارشات اخیر</h3>
-                            </div>
-                            <div class="table-info-btn">
-        
-                                <a href="/admin/dashboard/carts" class="w-btn h6">مشاهده همه</a>
-                            </div>
-                        </div>
-                        <div class="table-content">
-                            <table>
-                                <tbody>
-                                    {% for p in cart_list %}
-                                    <tr>
-                                        <td class="td-40 h6">{{p.user.email}}</td>
-                                        <td class="price-usd h6 td-30">{{p.final_price()}}</td>
-                                        
-                                        <td class="td-20 h6 td-status {{p.status}}">{{p.status}}</td>
-                        
-                                        <td class="td-20 h6 td-edit"><a href="{{ url_for('admin.edit_carts' , id=p.id ) }}" class="edit">Edit</a></td>
-                                    </tr>
-                                    {%endfor%}
-                                </tbody>
-                            </table>
-        
-                        </div>
-                        
-                    </div>
-                    <div class="table-div">
-                        <div class="table-info">
-                            <div class="table-info-h">
-        
-                                <h3>برترین مشتری ها</h3>
-                            </div>
-                            <div class="table-info-btn">
-        
-                                <a href="/admin/dashboard/customers" class="w-btn h6">مشاهده همه</a>
-                            </div>
-                        </div>
-                        <div class="table-content">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <th class="td-40 h6 th-40">ایمیل</th>
-                                        <th class="td-20 h6">تعداد خرید</th>
-                                        <th class="td-30 h6">مبلغ پرداختی</th>
-                                        <th class="td-20 h6">اطلاعات</th>
-                                    </tr>
-                                    {% for user in top_users %}
-                                    <tr>
-                                        <td class="td-40 h6">{{user.user_mail}}</td>
-                                        <td class=" td-20 h6">{{user.purchase_count }}</td>
-                                        <td class=" td-30 h6 price-usd Verify td-status">{{user.total_spent }}</td>
-                                        
-                        
-                                        <td class="td-20 td-edit"><a href="/admin/dashboard/customers/{{user.id}}" class="edit h6">اطلاعات</a></td>
-                                    </tr>
-                                    {%endfor%}
-                                </tbody>
-                            </table>
-        
-                        </div>
-                        
-                    </div>
-        
-                </div>
-                <div class="panel-table-box">
-                    <div class="table-div table-100">
-                        <div class="table-info">
-                            <div class="table-info-h">
-        
-                                <h3>بیشترین فروش</h3>
-                            </div>
-                            <div class="table-info-btn">
-        
-                                <a href="/admin/dashboard/products" class="w-btn h6">مشاهده همه</a>
-                            </div>
-                        </div>
-                        <div class="table-content">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <th class="td-40 h6 th-40">نام</th>
-                                        <th class="td-20 h6">تعداد </th>
-                                        <th class="td-30 h6">کل مبلغ</th>
-                                        <th class="td-20 h6">اطلاعات</th>
-                                    </tr>
-                                   
-                                    {% for product in top_products %}
-                                    <tr>
-                                        <td class="td-40 h6">{{product.product_name}}</td>
-                                        <td class=" td-20 h6">{{product.total_sold }}</td>
-                                        <td class=" td-30 h6 price-usd Verify td-status">{{product.total_revenue }}</td>
-                                        
-                        
-                                        <td class="td-20 td-edit"><a href="{{ url_for('admin.edit_products' , id=product.product_id ) }}" class="edit h6">تغییر</a></td>
-                                    </tr>
-                                    {%endfor%}
-                                </tbody>
-                            </table>
-        
-                        </div>
-                        
-                    </div>
-        
-                </div>
-               
-        
             </div>
-        
         </div>
-    </div>
-</body>
+        <div class="admin-content">
+            <div class="admin-content-top">
+                <div class="admin-content-top-name">
+                    <h1>داشبورد</h1>
+                </div>
+                <div class="admin-content-top-search">
+                    <form action="/admin/search">
+                        <input type="text" name="query" placeholder="جستوجو کن . . .">
+                        <button type="submit"><img src="/static/covers/img/search.png"></button>
+                    </form>
+                </div>
+                <div class="admin-content-top-date">
+                    <h4>{{date}}</h4>
+                </div>
+            </div>
+            <div class="admin-content-box">
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>کل فروش</h5>
+                        <div>
+                            <img src="/static/covers/img/icons8-wallet-50.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>12,000,000 تومان</h3>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>دوره ها </h5>
+                        <div>
 
+                            <img src="/static/covers/img/icons8-course-50.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>
+                            
+                            2
+
+                        </h3>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>کاربران</h5>
+                        <div>
+
+                            <img src="/static/covers/img/icons8-user-48.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>
+                            
+                            30
+
+                        </h3>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>مشاوره ها </h5>
+                        <div>
+                            <img src="/static/covers/img/icons8-chat-60.png" alt="">
+
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>5</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-content-table">
+                <div class="admin-content-table-div">
+                    <div class="admin-content-table-div-top">
+                        <h4>آخرین خرید ها</h4>
+                        <a class="h5" href="">همه</a>
+                    </div>
+                    <div></div>
+                </div>
+                <div class="admin-content-table-div">
+                    <div class="admin-content-table-div-top">
+                        <h4>آخرین خرید ها</h4>
+                        <a class="h5" href="">همه</a>
+                    </div>
+                    <div class="admin-content-table-div-body">
+                        <div class="admin-table-row">
+                            <div class="admin-table-row-data-img">
+                                <div>
+                                    <img src="/static/covers/img/masoud.jpg" alt="">
+
+                                </div>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <h6>آرش آرانی</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <h6>در انتظار تایید</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <a href="" class="h6">تغییر</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+</body>
 
 {% endblock %}

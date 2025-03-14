@@ -24,6 +24,7 @@ from models.card import Card
 
 from models.product import Product
 
+from extentions import today
 
 app = Blueprint('admin',__name__)
 
@@ -52,26 +53,20 @@ def main():
         else:
             # ابتدا بررسی متد GET
             if request.method == "GET":
-                verify_code = randint(1000, 9999)
-                print(verify_code)
                 
-                # ذخیره کد تأییدیه در session
-                session['verify_code'] = str(verify_code)
                 return render_template("/admin/login.html")
             # سپس بررسی متد POST
             elif request.method == "POST":
                 username = request.form.get('username', None)
                 password = request.form.get('password', None)
-                verify = request.form.get('verify')
 
-                if username == ADMIN_USERNAME and password == ADMIN_PASSWORD and verify == session.get('verify_code'):
+                if username == ADMIN_USERNAME and password == ADMIN_PASSWORD :
                     session['admin_login'] = username
-                    flash('success', "Welcome Back Boss !")
+                    flash('success', "خوش اومدی رئیس !")
                     return redirect('/admin/dashboard')
                 else:
-                    flash('error', 'Oops Something Went Wrong Try Again . . . ')
+                    flash('error', 'مشکلی پیش آمده ، بعدا تلاش کنید')
                     # تولید کد تأییدیه جدید
-                    session['verify_code'] = str(randint(1000, 9999))
                     return redirect('/admin/login')
 
     except Exception as e:
@@ -85,51 +80,8 @@ def main():
 
 @app.route('/admin/dashboard')
 def dashboard():
-    try :
-        
-        product_count = Product.query.count()
-        paid_count = Cart.query.filter(Cart.status == 'Verify').count()
-        user_count = User.query.count()
-        product_list = Product.query.all()
-        cart_list = Cart.query.filter(Cart.status == 'Verify').order_by(desc(Cart.id)).limit(5).all()
-        top_users = db.session.query(
-        User.email.label('user_mail'),
-        User.id.label('id'),
-        func.count(Cart.id).label('purchase_count'),
-        func.sum(CartItem.final_price * CartItem.quantity).label('total_spent')).join(Cart, User.id == Cart.user_id) \
-        .join(CartItem, Cart.id == CartItem.cart_id) \
-        .filter(or_(Cart.status == 'In Progress' , Cart.status == 'Delivered' )) \
-        .group_by(User.id) \
-        .order_by(func.count(Cart.id).desc()) \
-        .limit(4) \
-        .all()
-        top_products = db.session.query(
-        Product.id.label('product_id'),
-        Product.name.label('product_name'),
-        func.sum(CartItem.quantity).label('total_sold'),
-        func.sum(CartItem.final_price * CartItem.quantity).label('total_revenue')
-        ).join(CartItem, Product.id == CartItem.product_id) \
-        .join(Cart, CartItem.cart_id == Cart.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
-        .group_by(Product.id) \
-        .order_by(func.sum(CartItem.quantity).desc()) \
-        .limit(4) \
-        .all()
-        total_sales = db.session.query(
-            func.sum(CartItem.final_price * CartItem.quantity).label('total_revenue')
-        ).select_from(CartItem) \
-        .join(Cart, CartItem.cart_id == Cart.id) \
-        .join(Product, CartItem.product_id == Product.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
-        .scalar() or 0
-
-
-        return render_template('/admin/dashboard.html',product_count=product_count,paid_count=paid_count,
-                            user_count=user_count,total_sales = total_sales ,
-                            product_list = product_list , cart_list = cart_list , top_users = top_users ,top_products = top_products)
-    
-    except:
-        return abort(501)
+    date = today()
+    return render_template("/admin/dashboard.html" , date = date)
     
 @app.route('/admin/dashboard/products',methods=['GET','POST'])
 def products():
