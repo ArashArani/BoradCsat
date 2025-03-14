@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block header %}
-    <title>داشبورد ادمین</title>
+    <title>مدیریت دوره ها</title>
 {% endblock %}
 {% block body %}
 <body>
@@ -11,17 +11,17 @@
                 <h2>خانه برودکست</h2>
             </div>
             <div class="admin-sidebar-body">
-                <div class="admin-sidebar-body-link sidebar-active">
+                <div class="admin-sidebar-body-link ">
                     <a href="/admin/dashboard">
-                        <img src="/static/covers/img/dashboard-b.png" alt="">
+                        <img src="/static/covers/img/dashboard-w.png" alt="">
                         <h6>داشبورد</h6>
 
                     </a>
                 </div>
-                <div class="admin-sidebar-body-link">
+                <div class="admin-sidebar-body-link sidebar-active">
                     <a href="/admin/dashboard/courses">
 
-                        <img src="/static/covers/img/course-w.png" alt="">
+                        <img src="/static/covers/img/course-b.png" alt="">
                         <h6>دوره ها</h6>
                     </a>
                 </div>
@@ -171,10 +171,32 @@
             <div class="admin-content-table">
                 <div class="admin-content-table-div">
                     <div class="admin-content-table-div-top">
-                        <h4>آخرین خرید ها</h4>
-                        <a class="h5" href="">همه</a>
+                        <h4>دوره جدید</h4>
                     </div>
-                    <div></div>
+                    <div class="admin-content-table-form">
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">نام</label>
+                                    <input type="text" name="name" placeholder="مثال : دوره فیلم برداری " class="h5">
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">قیمت</label>
+                                    <input type="tel" name="price"  dir="rtl" placeholder="مثال : 2،000،000 " class="h5 price-usd-input">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">تخفیف</label>
+                                    <input type="text" dir="rtl" name="discount" id="discount" oninput="calculateFinalPrice()"  placeholder="مثال : 10 %  " class="h5">
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">قیمت نهایی</label>
+                                    <input type="text"  id="FinalPrice" dir="rtl"  placeholder="مثال :  1،800،000  " readonly class="h5">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="admin-content-table-div">
                     <div class="admin-content-table-div-top">

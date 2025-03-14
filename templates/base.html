@@ -15,15 +15,15 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/eggy.css')}}" />
     <link rel="stylesheet" href="{{url_for('static',filename='css/progressbar.css')}}" />
     <link rel="stylesheet" href="{{url_for('static',filename='css/theme.css')}}" />
+    <script src="/static/js/index.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css">
     
 </head>
 {% block body %} 
-
 {% endblock %}
 <script src="/static/js/index.js"></script>
-
 <script type="module">
+
     
     import { Eggy } from '{{url_for('static',filename='js/eggy.js')}}' ;
     {% for m , category  in get_flashed_messages(with_categories=true) %}
@@ -41,6 +41,7 @@
             });        
     {% endfor %}
 </script>  
+
 
 
 </html>
