@@ -175,6 +175,8 @@
                     </div>
                     <div class="admin-content-table-form">
                         <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
                             <div class="form-row">
                                 <div class="form-row-input">
                                     <label for="" class="h6">نام</label>
@@ -182,45 +184,89 @@
                                 </div>
                                 <div class="form-row-input">
                                     <label for="" class="h6">قیمت</label>
-                                    <input type="tel" name="price"  dir="rtl" placeholder="مثال : 2،000،000 " class="h5 price-usd-input">
+                                    <input type="tel" name="price" id="price" dir="rtl"  placeholder="مثال : 2،000،000 " class="h5"   oninput="calculateFinalPrice()">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-row-input">
                                     <label for="" class="h6">تخفیف</label>
-                                    <input type="text" dir="rtl" name="discount" id="discount" oninput="calculateFinalPrice()"  placeholder="مثال : 10 %  " class="h5">
+                                    <input type="tel" dir="rtl" name="discount" id="Discount"   placeholder="مثال : 10 %  " class="h5"   oninput="calculateFinalPrice()">
                                 </div>
                                 <div class="form-row-input">
                                     <label for="" class="h6">قیمت نهایی</label>
-                                    <input type="text"  id="FinalPrice" dir="rtl"  placeholder="مثال :  1،800،000  " readonly class="h5">
+                                    <input type="text" id="FinalPrice" dir="rtl"   placeholder="مثال :  1،800،000  " readonly class="h5">
                                 </div>
                             </div>
+
+                            <div class="form-row">
+                                <div class="form-row-textarea">
+                                    <label for="" class="h6">توضیحات کوتاه</label>
+                                    <textarea name="short_desc" class="h5"></textarea>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-textarea">
+                                    <label for="" class="h6">توضیحات بلند</label>
+                                    <textarea name="long_desc" class="h5"></textarea>
+
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">استاد</label>
+                                    <input type="text"  name="teacher"  placeholder="مثال : مسعود مهدیه آرانی " class="h5"   >
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">مدت دوره</label>
+                                    <input type="text"  name="time"   placeholder="مثال : 7:33:26" class="h5">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">عکس</label>
+                                    <input type="file"  name="pic"  class="h5"   >
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">مدت دوره</label>
+                                    <input type="checkbox"  name="active"    class="h5">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-btn">
+                                    <input type="submit" value="ثبت" class="h5 b-btn">
+                                </div>
+                               
+                            </div>
+
                         </form>
                     </div>
                 </div>
                 <div class="admin-content-table-div">
                     <div class="admin-content-table-div-top">
-                        <h4>آخرین خرید ها</h4>
-                        <a class="h5" href="">همه</a>
+                        <h4>آخرین دوره ها</h4>
                     </div>
                     <div class="admin-content-table-div-body">
-                        <div class="admin-table-row">
-                            <div class="admin-table-row-data-img">
-                                <div>
-                                    <img src="/static/covers/img/masoud.jpg" alt="">
+                        {% for i in page_list %}
+                            <div class="admin-table-row">
+                                <div class="admin-table-row-data-img">
+                                    <div>
+                                        <img src="/static/covers/courses/{{i.name}}.webp" class="admin-table-row-data-img-course" alt="">
 
+                                    </div>
+                                </div>
+                                <div class="admin-table-row-data">
+                                    <h6>{{i.name}}</h6>
+                                </div>
+                                <div class="admin-table-row-data">
+                                    <h6>{{i.active_show()}}</h6>
+                                </div>
+                                <div class="admin-table-row-data">
+                                    <a href="/admin/dashboard/courses/{{i.id}}" class="h6">تغییر</a>
                                 </div>
                             </div>
-                            <div class="admin-table-row-data">
-                                <h6>آرش آرانی</h6>
-                            </div>
-                            <div class="admin-table-row-data">
-                                <h6>در انتظار تایید</h6>
-                            </div>
-                            <div class="admin-table-row-data">
-                                <a href="" class="h6">تغییر</a>
-                            </div>
-                        </div>
+                        {% endfor %}
                         
                     </div>
                 </div>

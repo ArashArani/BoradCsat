@@ -97,3 +97,39 @@ def courses():
     page_list = Course.query.all()
     if request.method == 'GET':
         return render_template("/admin/courses.html", page_list = page_list ,user_count = user_count, consult_count = consult_count ,course_count = course_count ,date=date , total_sales = total_sales)
+    else :
+        name = request.form.get("name")
+        price = int(request.form.get("price"))
+        discount = int(request.form.get("discount"))
+        short_desc = request.form.get("short_desc")
+        long_desc = request.form.get("long_desc")
+        teacher = request.form.get("teacher")
+        time = request.form.get("time")
+        active = request.form.get("active")
+        pic = request.files.get("pic")
+        if discount == None or '':
+            discount = 0
+        print(active)
+
+        final_price = price - (price*(discount/100))
+        final_price = int(final_price)
+        discount_price = int(price * (discount/100))
+        c = Course()
+        c.name = name
+        c.price = price
+        c.discount = discount
+        c.discount_price = discount_price
+        c.final_price = final_price
+        c.short_desc = short_desc
+        c.long_desc = long_desc
+        c.teacher = teacher
+        c.time = time
+        if active == 'on':
+            c.active = 1
+        else:
+            c.active = 0
+        pic.save(f"static/covers/courses/{name}.webp")
+        db.session.add(c)
+        db.session.commit()
+        flash("success",f"دوره ی {name} با موفقیت در سیستم ثبت شد . ")
+        return redirect(url_for("admin.courses"))

@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
   // انتخاب تمام آیکون‌های نمایش و پنهان کردن پسورد
   const showPassIcons = document.querySelectorAll(".show-pass");
@@ -24,18 +22,27 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function calculateFinalPrice() {
-  const priceInput = document.getElementById("price").value;
-  const discountInput = document.getElementById("discount").value;
+  const priceInput = document.getElementById("price");
+  const discountInput = document.getElementById("Discount");
+  const finalPriceInput = document.getElementById("FinalPrice");
 
-  const price = parseFloat(priceInput) || 0; // تبدیل به عدد، در صورت خالی بودن 0 می‌گیرد
-  const discount = parseFloat(discountInput) || 0; // تبدیل به عدد، در صورت خالی بودن 0 می‌گیرد
+  // اطمینان از وجود عناصر
+  if (!priceInput || !discountInput || !finalPriceInput) {
+    console.error("یکی از عناصر وجود ندارد.");
+    return;
+  }
+
+  const price = parseFloat(priceInput.value) || 0; // تبدیل به عدد، در صورت خالی بودن 0 می‌گیرد
+  const discount = parseFloat(discountInput.value) || 0; // تبدیل به عدد، در صورت خالی بودن 0 می‌گیرد
 
   const finalPrice = price - price * (discount / 100); // محاسبه قیمت نهایی
 
   // فرمت‌بندی قیمت نهایی و نمایش به همراه واحد
-  document.getElementById("finalPrice").value =
-    finalPrice.toLocaleString("fa-IR") + " تومان";
+  finalPriceInput.value = finalPrice.toLocaleString("fa-IR") + " تومان";
 }
+calculateFinalPrice();
+
+
 function CopyText(index) {
   let textToCopy;
 

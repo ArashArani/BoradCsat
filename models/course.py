@@ -18,6 +18,10 @@ class Course(db.Model):
     short_desc=Column(VARCHAR)
     long_desc=Column(VARCHAR)
     teacher = Column(VARCHAR)
-    active = Column(Integer)
-    
-
+    time = Column(VARCHAR)
+    active = Column(INTEGER)
+    def active_show(self):
+        if self.active == 1:
+            return 'فعال'
+        else :
+            return 'غیر فعال'
