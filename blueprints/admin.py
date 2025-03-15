@@ -28,6 +28,8 @@ from models.course_video import CourseVideo
 
 from extentions import today
 
+from models.blog import Blog
+
 from models.experience import Experience
 
 app = Blueprint('admin', __name__)
@@ -367,3 +369,116 @@ def delete_exp():
     flash("success",f"تجربه ی {e.name} با موفقیت حذف شد . ")
     db.session.commit()
     return redirect(url_for("admin.experiences"))
+
+@app.route("/admin/dashboard/blogs",methods=['POST',"GET"])
+def blogs():
+    page_list = Blog.query.all()
+    date = today()
+    total_sales = db.session.query(
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+
+    if request.method == 'GET':
+        return render_template("/admin/blogs.html",page_list = page_list , date=date, card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
+                               user_count=user_count, consult_count=consult_count)
+    else : 
+        name = request.form.get("name")
+        author = request.form.get("author")
+        short_desc = request.form.get("short_desc")
+        long_desc = request.form.get("long_desc")
+        question1 = request.form.get("question1")
+        question2 = request.form.get("question2")
+        awnser1 = request.form.get("awnser1")
+        awnser2 = request.form.get("awnser2")
+        pic1 = request.files.get("pic1")
+        pic2 = request.files.get("pic2")
+
+        e = Blog(name = name , author = author , short_desc = short_desc , long_desc = long_desc , question1 = question1
+                       , question2 = question2 , awnser1 = awnser1 , awnser2 = awnser2)
+        
+        pic1.save(f"static/covers/blogs/{name}1.webp")
+        pic2.save(f"static/covers/blogs/{name}2.webp")
+
+        db.session.add(e)
+        db.session.commit()
+        flash("success",f'بلاگ {name} با موفقیت در سیستم ثبت شد . ')
+        return redirect(url_for("admin.blogs"))
+    
+@app.route("/admin/dashboard/blogs/<int:id>",methods=['POST','GET'])
+def edit_blog(id):
+    e = Blog.query.filter(Blog.id == id).first_or_404()
+    date = today()
+    total_sales = db.session.query(
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+    if request.method == 'GET':
+        
+        return render_template("/admin/edit-blogs.html",e = e , date=date, card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
+                               user_count=user_count, consult_count=consult_count)
+    else : 
+        name = request.form.get("name")
+        author = request.form.get("author")
+        short_desc = request.form.get("short_desc")
+        long_desc = request.form.get("long_desc")
+        question1 = request.form.get("question1")
+        question2 = request.form.get("question2")
+        awnser1 = request.form.get("awnser1")
+        awnser2 = request.form.get("awnser2")
+        pic1 = request.files.get("pic1")
+        pic2 = request.files.get("pic2")
+        e.name = name 
+        e.author = author
+        e.shrt_desc = short_desc
+        e.long_desc = long_desc
+        e.question1 = question1
+        e.question2 = question2
+        e.awnser1 = awnser1
+        e.awnser2 = awnser2
+
+        if pic1.filename != '':
+            os.remove(f"static/covers/blogs/{e.name}1.webp")
+            pic1.save(f"static/covers/blogs/{name}1.webp")
+            
+
+        if pic2.filename != '':
+            os.remove(f"static/covers/blogs/{e.name}2.webp")
+            pic2.save(f"static/covers/blogs/{name}2.webp")
+
+        flash("success",f"بلاگ {name} با موفقیت تغییر کرد .")
+        db.session.commit()
+        return redirect(url_for("admin.blogs"))
+
+
+
+@app.route("/delete-blog")
+def delete_blog():
+    id = request.args.get("id")
+    e = Blog.query.filter(Blog.id == id).first()
+    os.remove(f"static/covers/blogs/{e.name}1.webp")
+    os.remove(f"static/covers/blogs/{e.name}2.webp")
+    db.session.delete(e)
+    flash("success",f"بلاگ {e.name} با موفقیت حذف شد . ")
+    db.session.commit()
+    return redirect(url_for("admin.blogs"))

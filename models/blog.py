@@ -11,10 +11,11 @@ class Blog(db.Model):
     __tablename__="blogs"
     id = Column(Integer , primary_key= True)
     name = Column(VARCHAR)
-    price = Column(INTEGER)
+    author = Column(VARCHAR)
     short_desc=Column(VARCHAR)
     long_desc=Column(VARCHAR)
-    active = Column(Integer)
-    category_id = Column(Integer , ForeignKey('categories.id'), nullable=True )
-    
+    question1 = Column(VARCHAR)
+    question2 = Column(VARCHAR)
+    awnser1 = Column(VARCHAR)
+    awnser2 = Column(VARCHAR)
 
