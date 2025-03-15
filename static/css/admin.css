@@ -282,6 +282,9 @@
 .admin-content-table-div {
   width: calc(50% - 0.5rem);
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
   background-color: var(--admin-color-white);
 }
 .admin-content-table-div-top {
@@ -545,6 +548,24 @@ input:focus , textarea:focus{
     img {
       border-radius: 50%;
       width: 30px;
+    }
+  }
+  .admin-content-table-div-top , .admin-content-table-form{
+    width: calc(100% - 2rem);
+    margin: 1rem auto;
+  }
+  .form-row{
+    flex-direction: column;
+  }
+  .form-row-input{
+    width: 100%;
+  }
+  .admin-table-row-data-img-course {
+    width: 40px !important;
+  }
+  .admin-content-top-name {
+    h4 {
+        display: flex;
     }
   }
 }

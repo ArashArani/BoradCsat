@@ -228,3 +228,12 @@ def add_video(id):
         db.session.commit()
         flash("success",f"ویدئو {name} با موفقیت در سیستم ثبت شد . ")
         return redirect(url_for(f"admin.courses", id={course.id}) )
+    
+@app.route("/delete-video")
+def delte_video():
+    id = request.args.get("id")
+    video = CourseVideo.query.filter(CourseVideo.id == id).first()
+    flash("success",f"ویدئو ی {video.name} با موفقیت حذف شد . ")
+    db.session.delete(video)
+    db.session.commit()
+    return redirect(url_for("admin.courses"))
