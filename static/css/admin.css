@@ -395,7 +395,9 @@
   width: calc(100%);
   margin: auto;
 }
-
+.admin-content-table-div-edit{
+  width: 100%;
+}
 
 
 

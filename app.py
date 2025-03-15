@@ -6,6 +6,7 @@ from flask_wtf.csrf import CSRFProtect
 
 from flask_login import LoginManager
 
+from flask_migrate import Migrate
 
 
 #فایل ها 
@@ -57,6 +58,7 @@ login_manager = LoginManager()
 
 login_manager.init_app(app)
 
+migrate = Migrate(app , db)
 
 mail.init_app(app)
 

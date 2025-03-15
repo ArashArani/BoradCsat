@@ -24,6 +24,8 @@ from models.card import Card
 
 from models.course import Course
 
+from models.course_video import CourseVideo
+
 from extentions import today
 
 app = Blueprint('admin', __name__)
@@ -133,3 +135,67 @@ def courses():
         db.session.commit()
         flash("success",f"دوره ی {name} با موفقیت در سیستم ثبت شد . ")
         return redirect(url_for("admin.courses"))
+    
+@app.route("/admin/dashboard/courses/<int:id>",methods=['GET','POST'])
+def edit_course(id):
+    c = Course.query.filter(Course.id == id).first()
+    date = today()
+    total_sales = db.session.query(
+    func.sum(CartItem.final_price * CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+    page_list = CourseVideo.query.filter(CourseVideo.course_id == c.id).all()
+    if request.method == 'GET':
+        return render_template("/admin/edit-courses.html", c = c ,  page_list = page_list ,user_count = user_count, consult_count = consult_count ,course_count = course_count ,date=date , total_sales = total_sales)
+    else:
+        name = request.form.get("name")
+        price = int(request.form.get("price"))
+        discount = int(request.form.get("discount"))
+        short_desc = request.form.get("short_desc")
+        long_desc = request.form.get("long_desc")
+        teacher = request.form.get("teacher")
+        time = request.form.get("time")
+        active = request.form.get("active")
+        pic = request.files.get("pic")
+        if discount == None or '':
+            discount = 0
+
+        final_price = price - (price*(discount/100))
+        final_price = int(final_price)
+        discount_price = int(price * (discount/100))
+        c.name = name
+        c.price = price
+        c.discount = discount
+        c.discount_price = discount_price
+        c.final_price = final_price
+        c.short_desc = short_desc
+        c.long_desc = long_desc
+        c.teacher = teacher
+        c.time = time
+        if active == 'on':
+            c.active = 1
+        else:
+            c.active = 0
+        if pic.filename != "":
+            os.remove(f"static/covers/courses/{c.name}.webp")
+            pic.save(f"static/covers/courses/{name}.webp")
+        db.session.commit()
+        flash("success",f"دوره ی {name} با موفقیت تغییر کرد . ")
+        return redirect(url_for("admin.courses"))
+
+
+@app.route("/delete-course")
+def delete_course():
+    id = request.args.get("id")
+    course = Course.query.filter(Course.id == id).first_or_404()
+    db.session.delete(course)
+    db.session.commit()
+    os.remove(f"sratic/covers/courses/{course.name}.webp")
+    flash("success",f"دوره ی {course.name} با موفقیت حذف شد . ")
+    return redirect(url_for("admin.courses"))

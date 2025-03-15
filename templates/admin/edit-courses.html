@@ -169,9 +169,10 @@
                 </div>
             </div>
             <div class="admin-content-table">
-                <div class="admin-content-table-div">
+                <div class="admin-content-table-div ">
                     <div class="admin-content-table-div-top">
-                        <h4>دوره جدید</h4>
+                        <h4>ویرایش دوره </h4>
+                        <a href="/delete-course?id={{c.id}}" class="h5 ">حذف دوره</a>
                     </div>
                     <div class="admin-content-table-form">
                         <form method="post" enctype="multipart/form-data">
@@ -180,35 +181,35 @@
                             <div class="form-row">
                                 <div class="form-row-input">
                                     <label for="" class="h6">نام</label>
-                                    <input type="text" name="name" placeholder="مثال : دوره فیلم برداری " class="h5">
+                                    <input type="text" name="name" placeholder="مثال : دوره فیلم برداری " value="{{c.name}}"  class="h5">
                                 </div>
                                 <div class="form-row-input">
                                     <label for="" class="h6">قیمت</label>
-                                    <input type="tel" name="price" id="price" dir="rtl"  placeholder="مثال : 2،000،000 " class="h5"   oninput="calculateFinalPrice()">
+                                    <input type="tel" name="price" id="price" dir="rtl" value="{{c.price}}"  placeholder="مثال : 2،000،000 " class="h5"   oninput="calculateFinalPrice()">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-row-input">
                                     <label for="" class="h6">تخفیف</label>
-                                    <input type="tel" dir="rtl" name="discount" id="Discount"   placeholder="مثال : 10 %  " class="h5"   oninput="calculateFinalPrice()">
+                                    <input type="tel" value="{{c.discount}}" dir="rtl" name="discount" id="Discount"   placeholder="مثال : 10 %  " class="h5"   oninput="calculateFinalPrice()">
                                 </div>
                                 <div class="form-row-input">
                                     <label for="" class="h6">قیمت نهایی</label>
-                                    <input type="text" id="FinalPrice" dir="rtl"   placeholder="مثال :  1،800،000  " readonly class="h5">
+                                    <input type="text"   id="FinalPrice" dir="rtl"   placeholder="مثال :  1،800،000  " readonly class="h5">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-row-textarea">
                                     <label for="" class="h6">توضیحات کوتاه</label>
-                                    <textarea name="short_desc" class="h5"></textarea>
+                                    <textarea name="short_desc" class="h5">{{c.short_desc}}</textarea>
 
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-row-textarea">
                                     <label for="" class="h6">توضیحات بلند</label>
-                                    <textarea name="long_desc" class="h5"></textarea>
+                                    <textarea name="long_desc" class="h5">{{c.long_desc}}</textarea>
 
                                 </div>
                             </div>
@@ -216,11 +217,11 @@
                             <div class="form-row">
                                 <div class="form-row-input">
                                     <label for="" class="h6">استاد</label>
-                                    <input type="text"  name="teacher"  placeholder="مثال : مسعود مهدیه آرانی " class="h5"   >
+                                    <input type="text"  name="teacher" value="{{c.teacher}}" placeholder="مثال : مسعود مهدیه آرانی " class="h5"   >
                                 </div>
                                 <div class="form-row-input">
                                     <label for="" class="h6">مدت دوره</label>
-                                    <input type="text"  name="time"   placeholder="مثال : 7:33:26" class="h5">
+                                    <input type="text"  name="time" value="{{c.teacher}}"   placeholder="مثال : 7:33:26" class="h5">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -230,7 +231,7 @@
                                 </div>
                                 <div class="form-row-input">
                                     <label for="" class="h6">مدت دوره</label>
-                                    <input type="checkbox"  name="active"    class="h5">
+                                    <input type="checkbox"  name="active"  {{ "checked" if c.active == 1 }}  class="h5">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -246,24 +247,18 @@
                 <div class="admin-content-table-div">
                     <div class="admin-content-table-div-top">
                         <h4>آخرین دوره ها</h4>
+                        <a href="/admin/dashboard/courses/{{c.id}}/add-video" class="h5">افزودن ویدئو</a>
                     </div>
                     <div class="admin-content-table-div-body">
                         {% for i in page_list %}
                             <div class="admin-table-row">
-                                <div class="admin-table-row-data-img">
-                                    <div>
-                                        <img src="/static/covers/courses/{{i.name}}.webp" class="admin-table-row-data-img-course" alt="">
-
-                                    </div>
-                                </div>
+                                
                                 <div class="admin-table-row-data">
                                     <h6>{{i.name}}</h6>
                                 </div>
+                                
                                 <div class="admin-table-row-data">
-                                    <h6>{{i.active_show()}}</h6>
-                                </div>
-                                <div class="admin-table-row-data">
-                                    <a href="/admin/dashboard/courses/{{i.id}}" class="h6">تغییر</a>
+                                    <a href="/delete-video?id={{i.id}}" class="h6">حذف قسمت</a>
                                 </div>
                             </div>
                         {% endfor %}
