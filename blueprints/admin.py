@@ -482,3 +482,85 @@ def delete_blog():
     flash("success",f"بلاگ {e.name} با موفقیت حذف شد . ")
     db.session.commit()
     return redirect(url_for("admin.blogs"))
+
+@app.route("/admin/dashboard/cards",methods=['POST',"GET"])
+def cards():
+    page_list = Card.query.all()
+    date = today()
+    total_sales = db.session.query(
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+
+    if request.method == 'GET':
+        return render_template("/admin/cards.html",page_list = page_list , date=date, card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
+                               user_count=user_count, consult_count=consult_count)
+    else :
+        card_owner = request.form.get("card_owner")
+        card_number = request.form.get("card_number")
+        bank_name = request.form.get("bank_name")
+        status = request.form.get("status")
+        c = Card()
+        c.card_owner = card_owner
+        c.bank_name = bank_name
+        c.card_number =card_number
+        c.status = status
+        db.session.add(c)
+        db.session.commit()
+        flash("success",f'کارت {bank_name} با موفقیت در سیستم ثبت شد . ')
+        return redirect(url_for("admin.cards"))
+
+
+@app.route("/admin/dashboard/cards/<int:id>",methods=['POST',"GET"])
+def edit_cards(id):
+    c = Card.query.filter(Card.id == id).first()
+    date = today()
+    total_sales = db.session.query(
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+
+    if request.method == 'GET':
+        return render_template("/admin/edit-card.html",c =c , date=date, card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
+                               user_count=user_count, consult_count=consult_count)
+    else :
+        card_owner = request.form.get("card_owner")
+        card_number = request.form.get("card_number")
+        bank_name = request.form.get("bank_name")
+        status = request.form.get("status")
+        c.card_owner = card_owner
+        c.bank_name = bank_name
+        c.card_number =card_number
+        c.status = status
+        db.session.commit()
+        flash("success",f'کارت {bank_name} با موفقیت تغییر کرد . ')
+        return redirect(url_for("admin.cards"))
+
+@app.route("/delete-card")
+def delete_card():
+    id = request.args.get("id")
+    c = Card.query.filter(Card.id == id).first()
+    flash("success",f'کارت {c.bank_name} با موفقیت حذف شد . ')
+    db.session.delete(c)
+    db.session.commit()
+    return redirect(url_for("admin.cards"))
