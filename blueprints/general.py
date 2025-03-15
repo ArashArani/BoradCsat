@@ -19,3 +19,6 @@ from models.course import *
 
 app = Blueprint('general',__name__)
 
+@app.route("/")
+def main():
+    return render_template("home.html")

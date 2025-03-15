@@ -48,14 +48,6 @@ html {
   transition: ease-in-out 400ms;
   text-decoration: none;
 }
-:root {
-  --color-blue: #6cb5e0;
-  --color-pink: #f09bae;
-  --color-black: #151416;
-  --color-black-pas: #2c2c2c ;
-  --color-white: #ffffff;
-  --color-gray: #dadada;
-}
 
 input,
 input::placeholder {
@@ -148,30 +140,4 @@ p {
   p {
     font-size: 0.6rem;
   }
-  .waves {
-    height: 40px;
-    min-height: 40px;
-  }
-  .admin {
-    min-height: 250vh;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 }
