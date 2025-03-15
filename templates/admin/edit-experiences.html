@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>مدیریت تجربه ها</title>
+{% endblock %}
+{% block body %}
+<body>
+    <div class="admin-page">
+        <div class="admin-sidebar">
+            <div class="admin-sidebar-top">
+                <img id="AdminLogo" src="/static/covers/img/logo.png" alt="">
+                <h2>خانه برودکست</h2>
+            </div>
+            <div class="admin-sidebar-body">
+                <div class="admin-sidebar-body-link ">
+                    <a href="/admin/dashboard">
+                        <img src="/static/covers/img/dashboard-w.png" alt="">
+                        <h6>داشبورد</h6>
+
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/courses">
+
+                        <img src="/static/covers/img/course-w.png" alt="">
+                        <h6>دوره ها</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link  sidebar-active">
+                    <a href="/admin/dashboard/experiences">
+
+                        <img src="/static/covers/img/experience-b.png" alt="">
+                        <h6>تجربه ها</h6>
+
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/carts">
+
+                        <img src="/static/covers/img/cart-w.png" alt="">
+                        <h6>سفارشات</h6>
+                        {% if cart_count > 0 %}
+                        <div>
+
+                            <h6 class="alert h7">{{cart_count}}</h6>
+                        </div>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/users">
+
+                        <img src="/static/covers/img/user-w.png" alt="">
+                        <h6>کاربران</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/blogs">
+
+                        <img src="/static/covers/img/blog-w.png" alt="">
+                        <h6>بلاگ ها</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/consults">
+
+                        <img src="/static/covers/img/chat-w.png" alt="">
+                        <h6>مشاوره ها</h6>
+                        {% if consult_count > 0 %}
+                        <div>
+
+                            <h6 class="alert h7">{{consult_count}}</h6>
+                        </div>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/cards">
+
+                        <img src="/static/covers/img/card-w.png" alt="">
+                        <h6>کارت ها</h6>
+                        {% if card_count != 1 %}
+                            <div>
+
+                                <h6 class="alert h7"></h6>
+                            </div>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            <div class="admin-sidebar-down">
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/logout">
+
+                        <img src="/static/covers/img/logout-w.png" alt="">
+                        <h6>خروج از حساب</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-down-account">
+                    <div class="admin-sidebar-down-account-img">
+                        <img src="/static/covers/img/masoud.jpg" alt="">
+                    </div>
+                    <div class="admin-sidebar-down-account-role">
+                        <h4>مسعود مهدیه آرانی</h4>
+                        <h6>مدیر مجموعه</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="admin-content">
+            <div class="admin-content-top">
+                <div class="admin-content-top-name">
+                    <h1>تجربه ها</h1>
+                    <h4>{{date}}</h4>
+                </div>
+                <div class="admin-content-top-search">
+                    <form action="/admin/search">
+                        <input type="text" name="query" placeholder="جستوجو کن . . .">
+                        <button type="submit"><img src="/static/covers/img/search.png"></button>
+                    </form>
+                </div>
+                <div class="admin-content-top-date">
+                    <h4>{{date}}</h4>
+                </div>
+            </div>
+            <div class="admin-content-box">
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>کل فروش</h5>
+                        <div>
+                            <img src="/static/covers/img/icons8-wallet-50.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h4 class="price-usd">
+                            
+                            {{total_sales}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>دوره ها </h5>
+                        <div>
+
+                            <img src="/static/covers/img/icons8-course-50.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>
+                            
+                            {{course_count}}
+
+                        </h3>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>کاربران</h5>
+                        <div>
+
+                            <img src="/static/covers/img/icons8-user-48.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>
+                            
+                            {{user_count}}
+
+                        </h3>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>مشاوره ها </h5>
+                        <div>
+                            <img src="/static/covers/img/icons8-chat-60.png" alt="">
+
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>
+                            
+                            {{consult_count}}
+                        
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-content-table">
+                <div class="admin-content-table-div admin-content-table-div-edit">
+                    <div class="admin-content-table-div-top">
+                        <h4>تغییر تجربه </h4>
+                        <a href="/delete-exp?id={{e.id}}" class="h5">حذف تجربه</a>
+                    </div>
+                    <div class="admin-content-table-form">
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">نام</label>
+                                    <input value="{{e.name}}" type="text" name="name" placeholder="مثال : دوره فیلم برداری " class="h5">
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">نویسنده</label>
+                                    <input value="{{e.author}}" type="text" name="author" placeholder="مثال : مسعود مهدیه آرانی" class="h5">
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-textarea">
+                                    <label for="" class="h6">توضیحات کوتاه</label>
+                                    <textarea name="short_desc" class="h5">{{e.short_desc}}</textarea>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-textarea">
+                                    <label for="" class="h6">توضیحات بلند</label>
+                                    <textarea name="long_desc" class="h5">{{e.long_desc}}</textarea>
+
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">سوال 1</label>
+                                    <input value="{{e.question1}}" type="text"  name="question1"  placeholder="مثال : آیا استفاده از . . . " class="h5"   >
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">جواب 1</label>
+                                    <input value="{{e.awnser1}}" type="text"  name="awnser1"   placeholder="مثال : خیر ، اگر که ... " class="h5">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">سوال 2</label>
+                                    <input value="{{e.question2}}" type="text"  name="question2"  placeholder="مثال : آیا استفاده از . . . " class="h5"   >
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">جواب 2</label>
+                                    <input value="{{e.awnser2}}" type="text"  name="awnser2"   placeholder="مثال : خیر ، اگر که ... " class="h5">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">عکس اول</label>
+                                    <input type="file"  name="pic1"  class="h5"   >
+                                </div>
+                                
+                                <div class="form-row-input">
+                                    <label for="" class="h6">عکس دوم</label>
+                                    <input type="file"  name="pic2"  class="h5"   >
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-btn">
+                                    <input type="submit" value="ثبت" class="h5 b-btn">
+                                </div>
+                               
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+{% endblock %}
