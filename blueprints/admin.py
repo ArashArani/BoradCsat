@@ -69,9 +69,10 @@ def main():
 @app.route('/admin/dashboard')
 def dashboard():
     date = today()
-        
+
     total_sales = db.session.query(
-    func.sum(CartItem.final_price * CartItem.quantity).label('total_revenue')
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
@@ -80,14 +81,19 @@ def dashboard():
     course_count = Course.query.count()
     user_count = User.query.count()
     consult_count = Consult.query.filter(Consult.status == 'unread').count()
-    return render_template("/admin/dashboard.html", user_count = user_count, consult_count = consult_count ,course_count = course_count ,date=date , total_sales = total_sales)
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+    return render_template("/admin/dashboard.html", card_count=card_count, cart_count=cart_count, user_count=user_count, consult_count=consult_count, course_count=course_count, date=date, total_sales=total_sales)
 
 
 @app.route("/admin/dashboard/courses", methods=['POST', "GET"])
 def courses():
     date = today()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
     total_sales = db.session.query(
-    func.sum(CartItem.final_price * CartItem.quantity).label('total_revenue')
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
@@ -98,8 +104,8 @@ def courses():
     consult_count = Consult.query.filter(Consult.status == 'unread').count()
     page_list = Course.query.all()
     if request.method == 'GET':
-        return render_template("/admin/courses.html", page_list = page_list ,user_count = user_count, consult_count = consult_count ,course_count = course_count ,date=date , total_sales = total_sales)
-    else :
+        return render_template("/admin/courses.html", card_count=card_count, cart_count=cart_count, page_list=page_list, user_count=user_count, consult_count=consult_count, course_count=course_count, date=date, total_sales=total_sales)
+    else:
         name = request.form.get("name")
         price = int(request.form.get("price"))
         discount = int(request.form.get("discount"))
@@ -111,7 +117,6 @@ def courses():
         pic = request.files.get("pic")
         if discount == None or '':
             discount = 0
-        print(active)
 
         final_price = price - (price*(discount/100))
         final_price = int(final_price)
@@ -133,15 +138,17 @@ def courses():
         pic.save(f"static/covers/courses/{name}.webp")
         db.session.add(c)
         db.session.commit()
-        flash("success",f"دوره ی {name} با موفقیت در سیستم ثبت شد . ")
+        flash("success", f"دوره ی {name} با موفقیت در سیستم ثبت شد . ")
         return redirect(url_for("admin.courses"))
-    
-@app.route("/admin/dashboard/courses/<int:id>",methods=['GET','POST'])
+
+
+@app.route("/admin/dashboard/courses/<int:id>", methods=['GET', 'POST'])
 def edit_course(id):
     c = Course.query.filter(Course.id == id).first()
     date = today()
     total_sales = db.session.query(
-    func.sum(CartItem.final_price * CartItem.quantity).label('total_revenue')
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
@@ -149,10 +156,12 @@ def edit_course(id):
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
     consult_count = Consult.query.filter(Consult.status == 'unread').count()
     page_list = CourseVideo.query.filter(CourseVideo.course_id == c.id).all()
     if request.method == 'GET':
-        return render_template("/admin/edit-courses.html", c = c ,  page_list = page_list ,user_count = user_count, consult_count = consult_count ,course_count = course_count ,date=date , total_sales = total_sales)
+        return render_template("/admin/edit-courses.html", c=c, card_count=card_count, cart_count=cart_count, page_list=page_list, user_count=user_count, consult_count=consult_count, course_count=course_count, date=date, total_sales=total_sales)
     else:
         name = request.form.get("name")
         price = int(request.form.get("price"))
@@ -186,7 +195,7 @@ def edit_course(id):
             os.remove(f"static/covers/courses/{c.name}.webp")
             pic.save(f"static/covers/courses/{name}.webp")
         db.session.commit()
-        flash("success",f"دوره ی {name} با موفقیت تغییر کرد . ")
+        flash("success", f"دوره ی {name} با موفقیت تغییر کرد . ")
         return redirect(url_for("admin.courses"))
 
 
@@ -197,15 +206,17 @@ def delete_course():
     db.session.delete(course)
     db.session.commit()
     os.remove(f"sratic/covers/courses/{course.name}.webp")
-    flash("success",f"دوره ی {course.name} با موفقیت حذف شد . ")
+    flash("success", f"دوره ی {course.name} با موفقیت حذف شد . ")
     return redirect(url_for("admin.courses"))
 
-@app.route("/admin/dashboard/courses/<int:id>/add-video",methods=["POST","GET"])
+
+@app.route("/admin/dashboard/courses/<int:id>/add-video", methods=["POST", "GET"])
 def add_video(id):
     course = Course.query.filter(Course.id == id).first_or_404()
     date = today()
     total_sales = db.session.query(
-    func.sum(CartItem.final_price * CartItem.quantity).label('total_revenue')
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
@@ -213,27 +224,31 @@ def add_video(id):
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+
     consult_count = Consult.query.filter(Consult.status == 'unread').count()
     if request.method == 'GET':
-        return render_template("/admin/add-video.html",date = date , total_sales = total_sales , course_count = course_count ,
-                               user_count = user_count , consult_count = consult_count)
+        return render_template("/admin/add-video.html", date=date, card_count = card_count , cart_count = cart_count ,total_sales=total_sales, course_count=course_count,
+                               user_count=user_count, consult_count=consult_count)
     else:
         name = request.form.get("name")
         link = request.form.get("link")
         short_desc = request.form.get("short_desc")
 
-        v = CourseVideo(name = name , link = link , short_desc = short_desc)
+        v = CourseVideo(name=name, link=link, short_desc=short_desc)
         v.course = course
         db.session.add(v)
         db.session.commit()
-        flash("success",f"ویدئو {name} با موفقیت در سیستم ثبت شد . ")
-        return redirect(url_for(f"admin.courses", id={course.id}) )
-    
+        flash("success", f"ویدئو {name} با موفقیت در سیستم ثبت شد . ")
+        return redirect(url_for(f"admin.courses", id={course.id}))
+
+
 @app.route("/delete-video")
 def delte_video():
     id = request.args.get("id")
     video = CourseVideo.query.filter(CourseVideo.id == id).first()
-    flash("success",f"ویدئو ی {video.name} با موفقیت حذف شد . ")
+    flash("success", f"ویدئو ی {video.name} با موفقیت حذف شد . ")
     db.session.delete(video)
     db.session.commit()
     return redirect(url_for("admin.courses"))

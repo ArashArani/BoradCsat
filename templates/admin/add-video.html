@@ -38,6 +38,12 @@
 
                         <img src="/static/covers/img/cart-w.png" alt="">
                         <h6>سفارشات</h6>
+                        {% if cart_count > 0 %}
+                        <div>
+
+                            <h6 class="alert h7">{{cart_count}}</h6>
+                        </div>
+                        {% endif %}
                     </a>
                 </div>
                 <div class="admin-sidebar-body-link">
@@ -59,13 +65,25 @@
 
                         <img src="/static/covers/img/chat-w.png" alt="">
                         <h6>مشاوره ها</h6>
+                        {% if consult_count > 0 %}
+                        <div>
+
+                            <h6 class="alert h7">{{consult_count}}</h6>
+                        </div>
+                        {% endif %}
                     </a>
                 </div>
                 <div class="admin-sidebar-body-link">
-                    <a href="/admin/dashboard/consults">
+                    <a href="/admin/dashboard/cards">
 
                         <img src="/static/covers/img/card-w.png" alt="">
                         <h6>کارت ها</h6>
+                        {% if card_count != 1 %}
+                            <div>
+
+                                <h6 class="alert h7"></h6>
+                            </div>
+                        {% endif %}
                     </a>
                 </div>
             </div>

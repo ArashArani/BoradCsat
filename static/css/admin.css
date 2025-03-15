@@ -130,7 +130,24 @@
       width: 20px;
       margin-right: 15px;
     }
+    div{
+      aspect-ratio: 1;
+      width: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background-color: var(--admin-color-pink);
+      h6{
+        margin: auto;
+      }
+    }
   }
+}
+.alert{
+  color: var(--admin-color-black-op);
+  background-color: var(--admin-color-pink);
+  font-weight: 900;
 }
 .sidebar-active,
 .admin-sidebar-body-link:hover {
@@ -481,12 +498,21 @@ input:focus , textarea:focus{
   }
   .admin-sidebar-body-link {
     a {
+      position: relative;
       justify-content: center;
       h6 {
         display: none;
       }
       img {
         margin: 0;
+      }
+      div{
+        position: absolute;
+        width: 10px;
+        top: 10%;
+        left: 10%;
+        content: "";
+        border-radius: 50%;
       }
     }
   }
