@@ -12,6 +12,7 @@ class CourseVideo(db.Model):
     id = Column(Integer , primary_key= True)
     name = Column(VARCHAR)
     short_desc=Column(VARCHAR)
+    link = Column(VARCHAR)
     course = db.relationship("Course",backref="course_videos")
     course_id = Column(INTEGER , ForeignKey("courses.id"))    
 

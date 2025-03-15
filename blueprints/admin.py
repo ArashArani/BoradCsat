@@ -199,3 +199,32 @@ def delete_course():
     os.remove(f"sratic/covers/courses/{course.name}.webp")
     flash("success",f"دوره ی {course.name} با موفقیت حذف شد . ")
     return redirect(url_for("admin.courses"))
+
+@app.route("/admin/dashboard/courses/<int:id>/add-video",methods=["POST","GET"])
+def add_video(id):
+    course = Course.query.filter(Course.id == id).first_or_404()
+    date = today()
+    total_sales = db.session.query(
+    func.sum(CartItem.final_price * CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+    if request.method == 'GET':
+        return render_template("/admin/add-video.html",date = date , total_sales = total_sales , course_count = course_count ,
+                               user_count = user_count , consult_count = consult_count)
+    else:
+        name = request.form.get("name")
+        link = request.form.get("link")
+        short_desc = request.form.get("short_desc")
+
+        v = CourseVideo(name = name , link = link , short_desc = short_desc)
+        v.course = course
+        db.session.add(v)
+        db.session.commit()
+        flash("success",f"ویدئو {name} با موفقیت در سیستم ثبت شد . ")
+        return redirect(url_for(f"admin.courses", id={course.id}) )
