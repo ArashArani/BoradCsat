@@ -748,6 +748,7 @@ header{
   width: calc(100% - 2rem);
   margin: 2rem auto;
   display: flex;
+  flex-wrap: wrap;
 }
 .client-card{
   width: calc(33% - 1rem);
@@ -853,7 +854,7 @@ header{
 .blog-card{
   background-color: var(--admin-color-black-op);
 }
-
+/*        FOOTER        */
 footer{
   background-color: var(--user-color-black-op);
   display: flex;
@@ -954,12 +955,124 @@ footer{
 }
 
 
+/*           COURSE INFO                 */
 
+.course-info-top{
+  width: calc(100% - 6rem);
+  margin: 2rem auto;
+  gap: 2rem;
+  display: flex;
+}
+.course-info-top-img{
+  width: calc(40%);
+  display: flex;
+  border-radius: 5px ;
+  overflow: hidden;
+  img{
+    width: 100%;
+  }
+}
+.course-info-top-text{
+  width: calc(60%);
+  display: flex;
+  color: var(--admin-color-gray);
+  flex-direction: column;
+  justify-content: space-between;
+}
+.course-info-top-text-name{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  h1{
+    width: 60%;
+  }
+}
+.course-info-top-text-time{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.course-info-body{
+  width: calc(100% - 4rem);
+  margin: auto;
+  display: flex;
+}
+.course-info-body-video{
+  width: calc(40% - 2rem);
+  margin: 0 auto;
+  height: fit-content;
+  border-radius: 5px;
+  background-color: var(--user-color-black-op);
+  display: flex;
+  border: 2px solid var(--admin-color-gray);
+  flex-direction: column;
+}
+.course-info-body-video-top{
+  width: calc(100% - 4rem) ;
+  margin: 2rem auto;
+  display: flex;
+  color: var(--admin-color-gray);
+  justify-content: center;
+}
+.course-info-body-video-body{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 0 ;
+  border-top: 2px solid var(--admin-color-gray);
+}
+.video-card{
+  width: calc(100% - 2rem);
+  margin: auto;
+  display: flex;
+  background-color: var(--admin-color-gray);
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-radius: 5px;
+  div{
+    margin: 0 2rem;
+    a{
+      color: var(--admin-color-blue);
+      font-weight: 900;
+    }
+  }
+}
 
+.other-course{
+  background-color: var(--user-color-black-op);
+}
+.course-info-body-info{
+  width: calc(60% - 2rem);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.course-info-body-info-desc{
+  h3{
 
+    color: var(--admin-color-gray);
+  }
+}
+.course-info-down{
+  width: calc(100% - 6rem);
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-
-
+.course-info-body-info-other{
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 0;
+  gap: 1rem;
+  align-items: center;
+  color: var(--admin-color-gray);
+}
 
 
 
@@ -1001,7 +1114,7 @@ footer{
   }
 }
 
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: 1023px) {
   .admin-sidebar {
     width: calc(25% - 1rem);
   }
@@ -1168,5 +1281,75 @@ footer{
   }
   .header-links{
     display: none;
+  }
+  .banner{
+    flex-direction: column;
+    margin: 2rem auto;
+    gap: 2rem;
+  }
+  .banner-right , .banner-left{
+    width: 100%;
+  }
+  .banner-right-top{
+    h1{
+      font-size: 1.5rem;
+    }
+  }
+  .banner-right-body{
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+  .course-box-top{
+    margin: 2rem auto;
+  }
+  .course-card , .client-card , .exp-card{
+    width: calc(100% - 2rem);
+    margin: 1rem auto;
+  }
+  .exp-card{
+    gap: .5rem;
+  }
+  .course-box-body{
+    width: 100%;
+    margin: 2rem auto;
+  }
+  .exp-card-left{
+    gap: 2rem;
+  }
+
+  .course-box-info{
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .footer-top{
+    margin: 2rem auto;
+    flex-direction: column;
+    gap: 1rem;
+    div{
+      text-align: center;
+      width: 100%;
+    }
+    div.btn{
+      width: calc(50%);
+    }
+  }
+  .footer-body{
+    padding: 2rem 0;
+    gap: 2rem;
+    flex-direction: column;
+  }
+  .footer-body-main-top{
+    justify-content: center;
+  }
+  .footer-body-main-link{
+    align-items: center;
+    text-align: center;
+  }
+  .footer-body-main , .footer-body-link{
+    width: 100%;
+    align-items: center;
   }
 }

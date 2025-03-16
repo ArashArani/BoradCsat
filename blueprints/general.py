@@ -15,6 +15,8 @@ from models.cart_item import CartItem
 
 from models.experience import Experience
 
+from models.course_video import CourseVideo
+
 from models.card import Card
 
 from models.course import *
@@ -29,3 +31,17 @@ def main():
     exp_list = Experience.query.order_by(func.random()).limit(2).all()
     blog_list = Blog.query.order_by(func.random()).limit(2).all()
     return render_template("home.html", exp_list = exp_list ,course_list = course_list , blog_list = blog_list)
+
+@app.route("/courses/<name>")
+def course(name):
+    c = Course.query.filter(Course.name == name).first_or_404()
+    video_list = CourseVideo.query.filter(CourseVideo.course == c).all()
+    other_course = Course.query.filter(Course.name != name).order_by(func.random()).limit(1).all()
+
+    if current_user.is_authenticated:
+        purchased_items = current_user.carts.filter(Cart.status == 'Success').join(
+            CartItem).filter(CartItem.product == c).all()
+        return render_template("course-info.html",c=c ,other_course = other_course ,video_list = video_list , purchased_items = purchased_items)
+    else :
+        return render_template("course-info.html",c=c ,other_course = other_course ,video_list = video_list)
+    

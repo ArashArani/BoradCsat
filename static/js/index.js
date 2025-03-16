@@ -1,28 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   const PriceUSD = document.querySelectorAll(".price-toman");
-  PriceUSD.innerText = Number(PriceUSD.innerText).toLocaleString();
   PriceUSD.forEach((item) => {
-    item.innerText = Number(item.innerText).toLocaleString() + " تومان ";
+    const priceValue = Number(item.innerText);
+    if (!isNaN(priceValue)) {
+      item.innerText = priceValue.toLocaleString() + " تومان ";
+    }
   });
-
-  const HeaderRes = document.getElementById("HeaderRes");
-  const CloseBtn = document.getElementById("CloseBtn");
-  const MenuBtn = document.getElementById("MenuBtn");
-
-  MenuBtn.addEventListener("click",()=>{
-    HeaderRes.style.top = '0'
-    CloseBtn.style.display = 'flex'
-    MenuBtn.style.display = 'none'
-  });
-  CloseBtn.addEventListener("click",()=>{
-    HeaderRes.style.top = '-100vh'
-    CloseBtn.style.display = 'none'
-    MenuBtn.style.display = 'flex'
-  })
-
-
-
-
+  
 });
 
 function calculateFinalPrice() {
