@@ -498,6 +498,9 @@ header{
     }
   }
 }
+.header-res-btn , .header-res{
+  display: none;
+}
 
 
 /*      HEADER DONE        */
@@ -559,6 +562,7 @@ header{
 }
 .banner-left-img-main{
   width: 80%;
+  z-index: 0;
   aspect-ratio: 1;
   margin: auto;
   position: relative;
@@ -1107,5 +1111,62 @@ footer{
     h4 {
         display: flex;
     }
+  }
+  #MenuBtn{
+    display: flex;
+  }
+  #CloseBtn{
+    display: none;
+    z-index: 2;
+  }
+  header{
+    position: relative;
+    padding: 1rem 0;
+  }
+  .header-res-btn{
+    display: flex !important;
+  }
+  .header-res{
+    z-index: 1;
+    top: -100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--user-color-black-op);
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    padding: 4rem 0;
+    justify-content: center;
+    position: absolute;
+    color: var(--admin-color-gray);
+    div{
+      width: 25%;
+      display: flex;
+      justify-content: center;
+      a{
+        color: var(--admin-color-gray);
+      }
+    }
+  }
+  .header-logo{
+    width: calc(80% - 2rem);
+    margin: auto;
+    justify-content: flex-start;
+  }
+  .header-btn{
+    width: calc(20% - 1rem);
+    margin: auto;
+    div{
+      display: none;
+    }
+    div.header-res-btn{
+      display: flex;
+      img{
+        width: 40px;
+      }
+    }
+  }
+  .header-links{
+    display: none;
   }
 }

@@ -4,28 +4,25 @@ document.addEventListener("DOMContentLoaded", () => {
   PriceUSD.forEach((item) => {
     item.innerText = Number(item.innerText).toLocaleString() + " تومان ";
   });
-});
-document.addEventListener("DOMContentLoaded", function () {
-  // انتخاب تمام آیکون‌های نمایش و پنهان کردن پسورد
-  const showPassIcons = document.querySelectorAll(".show-pass");
-  const noShowIcons = document.querySelectorAll(".no-show");
-  const passwordInputs = document.querySelectorAll(".password-input");
 
-  showPassIcons.forEach((icon, index) => {
-    icon.addEventListener("click", () => {
-      passwordInputs[index].type = "text"; // تغییر نوع input به text
-      icon.style.display = "none"; // پنهان کردن آیکون چشم
-      noShowIcons[index].style.display = "block"; // نمایش آیکون بستن
-    });
-  });
+  const HeaderRes = document.getElementById("HeaderRes");
+  const CloseBtn = document.getElementById("CloseBtn");
+  const MenuBtn = document.getElementById("MenuBtn");
 
-  noShowIcons.forEach((icon, index) => {
-    icon.addEventListener("click", () => {
-      passwordInputs[index].type = "password"; // تغییر نوع input به password
-      icon.style.display = "none"; // پنهان کردن آیکون بستن
-      showPassIcons[index].style.display = "block"; // نمایش آیکون چشم
-    });
+  MenuBtn.addEventListener("click",()=>{
+    HeaderRes.style.top = '0'
+    CloseBtn.style.display = 'flex'
+    MenuBtn.style.display = 'none'
   });
+  CloseBtn.addEventListener("click",()=>{
+    HeaderRes.style.top = '-100vh'
+    CloseBtn.style.display = 'none'
+    MenuBtn.style.display = 'flex'
+  })
+
+
+
+
 });
 
 function calculateFinalPrice() {
@@ -80,100 +77,8 @@ function CopyText(index) {
   alert("Text copied to clipboard: " + textToCopy);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const AdminMnu = document.getElementById("AdminMnu");
-  const SideBar = document.getElementById("SideBar");
-  const PanelContent = document.getElementById("PanelContent");
-  const AdminX = document.getElementById("AdminX");
-  AdminMnu.addEventListener("click", () => {
-    SideBar.classList.toggle("Active-sidebar");
-    AdminMnu.style.display = "none";
-    AdminX.style.display = "block";
-    PanelContent.classList.toggle("content-active");
-  });
+document.addEventListener("DOMContentLoaded", ()=> {
+ 
 
-  AdminX.addEventListener("click", () => {
-    SideBar.classList.remove("Active-sidebar");
-    PanelContent.classList.remove("content-active");
-    AdminX.style.display = "none";
-    AdminMnu.style.display = "block";
-  });
-});
-function checkInput() {
-  const emailInput = document.getElementById("emailInput");
-  const continueBtn = document.getElementById("continueBtn");
 
-  // Enable the button if the input is not empty
-  continueBtn.disabled = !emailInput.value.trim();
-}
-function toggleReadonly(checkbox) {
-  const inputField = document.getElementById("link");
-  const stock = document.getElementById("stock");
-  inputField.readOnly = !checkbox.checked;
-  stock.readOnly = checkbox.checked;
-}
-const FirstStep = document.getElementById("FirstStep");
-const StepDiv1 = document.getElementById("StepDiv1");
-const StepDiv2 = document.getElementById("StepDiv2");
-const SecendStep = document.getElementById("SecendStep");
-function SwipeForward() {
-  FirstStep.classList.toggle("First-Step-Done");
-  StepDiv1.classList.toggle("done-step-div");
-  StepDiv2.classList.toggle("focus-step");
-  SecendStep.classList.toggle("Active-Step");
-}
-function SwipeBack() {
-  FirstStep.classList.toggle("First-Step-Done");
-  StepDiv1.classList.toggle("done-step-div");
-  StepDiv2.classList.toggle("focus-step");
-  SecendStep.classList.toggle("Active-Step");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const HeaderLogin = document.getElementById("HeaderLogin");
-  const MenuBtn = document.getElementById("MenuBtn");
-  const HeaderSearchRes = document.getElementById("HeaderSearchRes");
-  const HeaderBody = document.getElementById("HeaderBody");
-  const XBtn = document.getElementById("Xbtn");
-
-  MenuBtn.addEventListener("click", () => {
-    HeaderSearchRes.classList.toggle("active-search");
-    HeaderBody.classList.toggle("active-body");
-    HeaderLogin.classList.toggle("active-login");
-    MenuBtn.classList.toggle("menu-rot");
-    XBtn.classList.toggle("menu-ac");
-
-    // Use animationend to hide the button after the animation
-    MenuBtn.addEventListener(
-      "animationend",
-      () => {
-        MenuBtn.style.display = "none";
-        XBtn.style.display = "block";
-        MenuBtn.classList.toggle("menu-rot");
-        XBtn.classList.toggle("menu-ac");
-      },
-      { once: true }
-    );
-  });
-
-  XBtn.addEventListener("click", () => {
-    HeaderSearchRes.classList.toggle("active-search");
-    HeaderBody.classList.toggle("active-body");
-    HeaderLogin.classList.toggle("active-login");
-
-    XBtn.classList.toggle("menu-rot");
-    MenuBtn.classList.toggle("menu-ac");
-
-    // Use animationend to hide the button after the animation
-    XBtn.addEventListener(
-      "animationend",
-      () => {
-        XBtn.style.display = "none"; // Hide the close button
-        MenuBtn.style.display = "block"; // Show the menu button
-        XBtn.classList.toggle("menu-rot");
-        MenuBtn.classList.toggle("menu-ac");
-      },
-      { once: true }
-    );
-  });
 });
