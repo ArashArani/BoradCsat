@@ -1,0 +1,33 @@
+<section class="client-box">
+    <div class="client-box-top">
+        <h5>بلاگ ها </h5>
+        <h2>مطلب <span>علمی</span> بخونیم . </h2>
+    </div>
+    <div class="client-box-body">
+        {% for i in blog_list %}
+        
+            <article class="course-card blog-card">
+                <div class="course-card-img">
+                    <a href="/blogs/{{i.name}}">
+            
+                        <img src="/static/covers/blogs/{{i.name}}1.webp" alt="{{i.name}}">
+                    </a>
+                </div>
+                <div class="course-card-info">
+                    <div class="course-card-info-name">
+                        <a href="/blogs/{{i.name}}" class="h5">{{i.name | truncate(31)}}</a>
+                        <p class="h6">{{i.author}}</p>
+                    </div>
+                    <div class="course-card-info-desc">
+                        <p class="h7">
+                            {{i.short_desc | truncate(350)}}
+            
+                        </p>
+                    </div>
+                    
+                </div>
+            </article>
+                
+        {% endfor %}
+    </div>
+</section>

@@ -19,10 +19,13 @@ from models.card import Card
 
 from models.course import *
 
+from models.blog import Blog
+
 app = Blueprint('general',__name__)
 
 @app.route("/")
 def main():
     course_list = Course.query.all()
-    exp_list = Experience.query.all()
-    return render_template("home.html", exp_list = exp_list ,course_list = course_list)
+    exp_list = Experience.query.order_by(func.random()).limit(2).all()
+    blog_list = Blog.query.order_by(func.random()).limit(2).all()
+    return render_template("home.html", exp_list = exp_list ,course_list = course_list , blog_list = blog_list)
