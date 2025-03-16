@@ -1,0 +1,29 @@
+<article class="course-card">
+    <div class="course-card-img">
+        <a href="/courses/{{i.name}}">
+
+            <img src="/static/covers/courses/{{i.name}}.webp" alt="{{i.name}}">
+        </a>
+    </div>
+    <div class="course-card-info">
+        <div class="course-card-info-name">
+            <a href="/courses/{{i.name}}" class="h5">{{i.name | truncate(31)}}</a>
+            <p class="h6">{{i.teacher}}</p>
+        </div>
+        <div class="course-card-info-desc">
+            <p class="h7">
+                {{i.short_desc | truncate(350)}}
+
+            </p>
+        </div>
+        <div class="course-card-info-down">
+            <div class="course-card-info-down-time">
+                <p class="h5">مدت دوره : {{i.time}}</p>
+            </div>
+            <div class="course-card-info-down-price">
+                <h6 class="h5 discount-price price-toman">{{i.price}}</h6>
+                <h6 class="h5 price-toman">{{i.final_price}}</h6>
+            </div>
+        </div>
+    </div>
+</article>

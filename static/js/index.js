@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const PriceUSD = document.querySelectorAll(".price-toman");
+  PriceUSD.innerText = Number(PriceUSD.innerText).toLocaleString();
+  PriceUSD.forEach((item) => {
+    item.innerText = Number(item.innerText).toLocaleString() + " تومان ";
+  });
+});
 document.addEventListener("DOMContentLoaded", function () {
   // انتخاب تمام آیکون‌های نمایش و پنهان کردن پسورد
   const showPassIcons = document.querySelectorAll(".show-pass");
@@ -26,12 +33,6 @@ function calculateFinalPrice() {
   const discountInput = document.getElementById("Discount");
   const finalPriceInput = document.getElementById("FinalPrice");
 
-  // اطمینان از وجود عناصر
-  if (!priceInput || !discountInput || !finalPriceInput) {
-    console.error("یکی از عناصر وجود ندارد.");
-    return;
-  }
-
   const price = parseFloat(priceInput.value) || 0; // تبدیل به عدد، در صورت خالی بودن 0 می‌گیرد
   const discount = parseFloat(discountInput.value) || 0; // تبدیل به عدد، در صورت خالی بودن 0 می‌گیرد
 
@@ -41,7 +42,6 @@ function calculateFinalPrice() {
   finalPriceInput.value = finalPrice.toLocaleString("fa-IR") + " تومان";
 }
 calculateFinalPrice();
-
 
 function CopyText(index) {
   let textToCopy;
@@ -176,11 +176,4 @@ document.addEventListener("DOMContentLoaded", () => {
       { once: true }
     );
   });
-});
-
-const PriceUSD = document.querySelectorAll(".price-usd");
-
-PriceUSD.innerText = Number(PriceUSD.innerText).toLocaleString();
-PriceUSD.forEach((item) => {
-  item.innerText = Number(item.innerText).toLocaleString() + " تومان ";
 });

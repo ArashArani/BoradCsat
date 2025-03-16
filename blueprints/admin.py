@@ -209,7 +209,7 @@ def delete_course():
     course = Course.query.filter(Course.id == id).first_or_404()
     db.session.delete(course)
     db.session.commit()
-    os.remove(f"sratic/covers/courses/{course.name}.webp")
+    os.remove(f"static/covers/courses/{course.name}.webp")
     flash("success", f"دوره ی {course.name} با موفقیت حذف شد . ")
     return redirect(url_for("admin.courses"))
 

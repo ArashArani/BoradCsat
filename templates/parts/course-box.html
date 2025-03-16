@@ -1,0 +1,21 @@
+<section class="course-box">
+    <div class="course-box-top">
+        <div></div>
+    </div>
+    <div class="course-box-info">
+        <div>
+            <p class="h3">دوره های خانه برودکست</p>
+        </div>
+        <div>
+            <p class="h5">
+                با ما میتونی توی این دنیا قدم بزنی و یادبگیری ، یادگیری از کنار ما رد میشه . 
+
+            </p>
+        </div>
+    </div>
+    <div class="course-box-body">
+        {% for i in course_list %}
+            {% include 'parts/course-card.html'   %}
+        {% endfor %}
+    </div>
+</section>

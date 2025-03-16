@@ -21,4 +21,5 @@ app = Blueprint('general',__name__)
 
 @app.route("/")
 def main():
-    return render_template("home.html")
+    course_list = Course.query.all()
+    return render_template("home.html",course_list = course_list)
