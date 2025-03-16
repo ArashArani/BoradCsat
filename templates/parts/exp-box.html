@@ -1,0 +1,22 @@
+<section class="course-box">
+    <div class="course-box-top">
+        <div></div>
+    </div>
+    <div class="course-box-info">
+        <div>
+            <p class="h3">تجربه های خانه برودکست</p>
+        </div>
+        <div>
+            <p class="h5">
+
+                تجربه قیمتش زیاده ، ما اینجا تجربه هامون رو باهات به اشتراک میزاریم . 
+            </p>
+        </div>
+    </div>
+    <div class="course-box-body">
+        {% for i in exp_list %}
+            {% include 'parts/exp-card.html'   %}
+        {% endfor %}
+        
+    </div>
+</section>

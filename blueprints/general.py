@@ -13,6 +13,8 @@ from models.cart import *
 
 from models.cart_item import CartItem
 
+from models.experience import Experience
+
 from models.card import Card
 
 from models.course import *
@@ -22,4 +24,5 @@ app = Blueprint('general',__name__)
 @app.route("/")
 def main():
     course_list = Course.query.all()
-    return render_template("home.html",course_list = course_list)
+    exp_list = Experience.query.all()
+    return render_template("home.html", exp_list = exp_list ,course_list = course_list)

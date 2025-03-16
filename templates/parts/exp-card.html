@@ -1,0 +1,15 @@
+<article class="exp-card">
+    <div class="exp-card-right">
+        <a href="/experiences/{{i.name}}">
+            <img src="/static/covers/exp/{{i.name}}1.webp" alt="{{i.name}}">
+        </a>
+    </div>
+    <div class="exp-card-left">
+        <a href="/experiences/{{i.name}}" class="h2">{{i.name}}</a>
+        <p class="h6">
+
+            {{i.short_desc | truncate(400)}}
+
+        </p>
+    </div>
+</article>
