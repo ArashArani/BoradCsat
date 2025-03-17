@@ -16,6 +16,7 @@ from blueprints.admin import app as admin
 
 from blueprints.general import app as general
 
+from blueprints.user import app as user
 
 from models.user import User
 
@@ -31,6 +32,8 @@ app = Flask(__name__)
 app.register_blueprint(admin)
 
 app.register_blueprint(general)
+
+app.register_blueprint(user)
 
 #کد ها 
 
@@ -68,7 +71,7 @@ def load_user(user_id):
 
 @login_manager.unauthorized_handler
 def unauthorized ():
-    flash ('error','For Use Our Website Please Log in To Your Account')
+    flash ('error','برای استفاده از خدمات ما وارد حساب خود شوید . ')
     return redirect(url_for('user.login'))
 
 with app.app_context():

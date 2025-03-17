@@ -10,11 +10,9 @@ from flask_login import UserMixin
 class User(db.Model, UserMixin):
     __tablename__="users"
     id = Column(Integer , primary_key= True)
-    email = Column(VARCHAR)
-    phone = Column(VARCHAR)
-    f_name = Column(VARCHAR , nullable=True , default='None')
-    l_name = Column(VARCHAR , nullable=True , default='None')
+    username = Column(VARCHAR)
     password = Column(VARCHAR)
+    phone = Column(VARCHAR)
 
     
 

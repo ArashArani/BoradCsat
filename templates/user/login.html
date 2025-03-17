@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>ورود به خانه برودکست</title>
+{% endblock %}
+{% block body %}
+<body class="user-home">
+        
+    <div class="user-login">
+        <div class="user-login-div">
+            <div class="user-login-div-top">
+                <div class="user-login-div-top-img">
+                    <img src="/static/covers/img/logo.png" alt="خانه برودکست">
+                </div>
+                <div class="user-login-div-top-text">
+                    <h1>ورود</h1>
+                    <h2 class="h4">خانه برودکست</h2>
+                </div>
+            </div>
+            <div class="user-login-div-body">
+                <form enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                    <div class="admin-login-box-form">
+                        <label class="h2" for="">نام کاربری</label>
+                        <input type="text" class="h2" name="username">
+                    </div>
+
+                    <div class="admin-login-box-form">
+                        <label class="h2" for="">رمز عبور</label>
+                        <input type="password" class="h2" name="password">
+                    </div>
+                                        
+                    <div class="admin-login-box-btn">
+                        <input type="submit" value="ورود" class="b-btn h2">
+                    </div>
+
+
+
+
+
+
+
+
+                </form>
+            </div>
+            <div class="user-login-div-down">
+                <h3>اکانت ندارید ؟ <a href="/user/sign-up">یکی بساز</a></h3>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>    
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
