@@ -564,3 +564,25 @@ def delete_card():
     db.session.delete(c)
     db.session.commit()
     return redirect(url_for("admin.cards"))
+
+@app.route("/admin/dashboard/carts")
+def carts():
+    date = today()
+    total_sales = db.session.query(
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+    approved_list = Cart.query.filter(Cart.status == 'Approved').all()
+    verify_list = Cart.query.filter(Cart.status == 'Verify').all()
+    rejected_list = Cart.query.filter(Cart.status == 'Rejected').all()
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+    return render_template("/admin/carts.html",verify_list = verify_list ,rejected_list = rejected_list ,  approved_list = approved_list , date=date, card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
+                               user_count=user_count, consult_count=consult_count)

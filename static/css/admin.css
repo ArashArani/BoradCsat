@@ -147,7 +147,7 @@
   }
 }
 .alert {
-  color: var(--admin-color-black-op);
+  color: var(--admin-color-black-op) !important;
   background-color: var(--admin-color-pink);
   font-weight: 900;
 }
@@ -159,6 +159,7 @@
   h6 {
     color: var(--admin-color-blue);
   }
+
 }
 .admin-sidebar-down {
   margin: auto auto 0;
@@ -191,6 +192,7 @@
 .admin-content {
   width: calc(80% - 1rem);
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   margin: 0 auto 0 1rem;
 }

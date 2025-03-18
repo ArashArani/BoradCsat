@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block header %}
-    <title>داشبورد ادمین</title>
+    <title>سفارشات</title>
 {% endblock %}
 {% block body %}
 <body>
@@ -11,9 +11,9 @@
                 <h2>خانه برودکست</h2>
             </div>
             <div class="admin-sidebar-body">
-                <div class="admin-sidebar-body-link sidebar-active">
+                <div class="admin-sidebar-body-link ">
                     <a href="/admin/dashboard">
-                        <img src="/static/covers/img/dashboard-b.png" alt="">
+                        <img src="/static/covers/img/dashboard-w.png" alt="">
                         <h6>داشبورد</h6>
 
                     </a>
@@ -33,10 +33,10 @@
 
                     </a>
                 </div>
-                <div class="admin-sidebar-body-link">
+                <div class="admin-sidebar-body-link sidebar-active">
                     <a href="/admin/dashboard/carts">
 
-                        <img src="/static/covers/img/cart-w.png" alt="">
+                        <img src="/static/covers/img/cart-b.png" alt="">
                         <h6>سفارشات</h6>
                         {% if cart_count > 0 %}
                         <div>
@@ -109,7 +109,7 @@
         <div class="admin-content">
             <div class="admin-content-top">
                 <div class="admin-content-top-name">
-                    <h1>داشبورد</h1>
+                    <h1>سفارشات</h1>
                     <h4>{{date}}</h4>
                 </div>
                 <div class="admin-content-top-search">
@@ -189,11 +189,10 @@
             <div class="admin-content-table">
                 <div class="admin-content-table-div">
                     <div class="admin-content-table-div-top">
-                        <h4>آخرین خرید ها</h4>
-                        <a class="h5" href="/admin/dashboard/carts">همه</a>
+                        <h4>در انتظار تایید ها </h4>
                     </div>
                     <div class="admin-content-table-div-body">
-                        {% for i in order_list %}
+                        {% for i in verify_list %}
                         <div class="admin-table-row">
                             <div class="admin-table-row-data">
                                 <h6>{{ i.user.username }}</h6>
@@ -216,30 +215,61 @@
                 </div>
                 <div class="admin-content-table-div">
                     <div class="admin-content-table-div-top">
-                        <h4>آخرین خرید ها</h4>
-                        <a class="h5" href="">همه</a>
+                        <h4>رد شده ها </h4>
                     </div>
                     <div class="admin-content-table-div-body">
+                        {% for i in rejected_list %}
                         <div class="admin-table-row">
-                            <div class="admin-table-row-data-img">
-                                <div>
-                                    <img src="/static/covers/img/masoud.jpg" alt="">
-
-                                </div>
+                            <div class="admin-table-row-data">
+                                <h6>{{ i.user.username }}</h6>
                             </div>
                             <div class="admin-table-row-data">
-                                <h6>آرش آرانی</h6>
+                                <h6 class="price-toman">{{ i.final_price() }}</h6>
                             </div>
                             <div class="admin-table-row-data">
-                                <h6>در انتظار تایید</h6>
+                                <h6>{{i.persian_status()}}</h6>
                             </div>
                             <div class="admin-table-row-data">
-                                <a href="" class="h6">تغییر</a>
+                                <a href="/admin/dashboard/carts/{{i.id}}" class="h6">تغییر</a>
                             </div>
+                            
+                            
                         </div>
+                        {% endfor %}
                         
                     </div>
                 </div>
+                
+            </div>
+            <div class="admin-content-table">
+                
+                <div class="admin-content-table-div admin-content-table-div-edit">
+                    <div class="admin-content-table-div-top">
+                        <h4>تایید شده ها</h4>
+                    </div>
+                    <div class="admin-content-table-div-body">
+                        {% for i in approved_list %}
+                        <div class="admin-table-row">
+                            <div class="admin-table-row-data">
+                                <h6>{{ i.user.username }}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <h6 class="price-toman">{{ i.final_price() }}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <h6>{{i.persian_status()}}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <a href="/admin/dashboard/carts/{{i.id}}" class="h6">تغییر</a>
+                            </div>
+                            
+                            
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+                
             </div>
 
         </div>
