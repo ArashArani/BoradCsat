@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block header %}
-    <title>مدیریت دوره ها</title>
+    <title>سفارشات</title>
 {% endblock %}
 {% block body %}
 <body>
@@ -18,10 +18,10 @@
 
                     </a>
                 </div>
-                <div class="admin-sidebar-body-link sidebar-active">
+                <div class="admin-sidebar-body-link">
                     <a href="/admin/dashboard/courses">
 
-                        <img src="/static/covers/img/course-b.png" alt="">
+                        <img src="/static/covers/img/course-w.png" alt="">
                         <h6>دوره ها</h6>
                     </a>
                 </div>
@@ -33,10 +33,10 @@
 
                     </a>
                 </div>
-                <div class="admin-sidebar-body-link">
+                <div class="admin-sidebar-body-link sidebar-active">
                     <a href="/admin/dashboard/carts">
 
-                        <img src="/static/covers/img/cart-w.png" alt="">
+                        <img src="/static/covers/img/cart-b.png" alt="">
                         <h6>سفارشات</h6>
                         {% if cart_count > 0 %}
                         <div>
@@ -109,7 +109,7 @@
         <div class="admin-content">
             <div class="admin-content-top">
                 <div class="admin-content-top-name">
-                    <h1>دوره ها</h1>
+                    <h1>سفارشات</h1>
                     <h4>{{date}}</h4>
                 </div>
                 <div class="admin-content-top-search">
@@ -189,45 +189,74 @@
             <div class="admin-content-table">
                 <div class="admin-content-table-div admin-content-table-div-edit">
                     <div class="admin-content-table-div-top">
-                        <h4>ویدئو جدید</h4>
+                        <h4>سفارش شماره ی # {{cart.id}}</h4>
+                        <h4 class="price-toman">{{cart.final_price()}}</h4>
                     </div>
-                    <div class="admin-content-table-form">
-                        <form method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
-                            <div class="form-row">
-                                <div class="form-row-input">
-                                    <label for="" class="h6">نام</label>
-                                    <input type="text" name="name" placeholder="مثال :  قسمت اول - مقدمه ای بر دوره " class="h5">
-                                </div>
-                                <div class="form-row-input">
-                                    <label for="" class="h6">لینک</label>
-                                    <input type="text" name="link"   placeholder="مثال :  www.aparat.com" class="h5"   oninput="calculateFinalPrice()">
-                                </div>
+                    <div class="admin-content-table-div-body">
+                        {% for i in cart.cart_items %}
+                        <div class="cart-card">
+                            <div class="cart-card-img">
+                                <img src="/static/covers/courses/{{i.course.name}}.webp" alt="{{i.course.name}}">
+                                <span class="h5 off-span">%{{i.course.discount}} </span>
+                            </div>
+                            <div class="cart-card-name">
+                                <h2>{{i.course.name}}</h2>
+                            </div>
+                            <div class="cart-card-price">
+                                <h3 class="discount-price price-toman">{{i.course.price}}</h3>
+                                <h3 class="price-toman">{{i.course.final_price}}</h3>
                             </div>
                             
-
-                            <div class="form-row">
-                                <div class="form-row-textarea">
-                                    <label for="" class="h6">توضیحات</label>
-                                    <textarea name="short_desc" class="h5"></textarea>
-
+                        </div>
+                        {% endfor %}
+                        <div class="admin-content-table-form">
+                            <form method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+                                <div class="form-row">
+                                    <div class="form-row-input">
+                                        <label for="" class="h6">شماره سفارش </label>
+                                        <input type="text" readonly value="{{cart.id}}" class="h5">
+                                    </div>
+                                    <div class="form-row-input">
+                                        <label for="" class="h6">قیمت</label>
+                                        <input type="tel"  class="h5" value="{{cart.final_price() }}">
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            
-                            <div class="form-row">
-                                <div class="form-row-btn">
-                                    <input type="submit" value="ثبت" class="h5 b-btn">
+                                
+    
+                           
+    
+                                <div class="form-row">
+                                    <div class="form-row-input">
+                                        <label for="" class="h6">نام کاربری</label>
+                                        <input type="text"  value="{{cart.user.username }}" class="h5"   >
+                                    </div>
+                                    <div class="form-row-input">
+                                        <label for="" class="h6">وضعیت</label>
+                                        <select name="status" >
+                                            <option {% if cart.status =='Approved' %} selected {% endif %}  value="Approved">تایید شده</option>
+                                            <option {% if cart.status =='Verify' %} selected {% endif %}  value="Verify">در انتظار تایید</option>
+                                            <option {% if cart.status =='Rejected' %} selected {% endif %}  value="Rejected">تایید نشده</option>
+                                        </select>
+                                    </div>
                                 </div>
-                               
-                            </div>
-
-                        </form>
+                                
+                                <div class="form-row">
+                                    <div class="form-row-btn">
+                                        <input type="submit" value="ثبت" class="h5 b-btn">
+                                    </div>
+                                   
+                                </div>
+    
+                            </form>
+                        </div>
+                        
                     </div>
                 </div>
-                
+               
             </div>
+            
 
         </div>
     </div>

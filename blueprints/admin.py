@@ -80,7 +80,7 @@ def dashboard():
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -101,7 +101,7 @@ def courses():
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -156,7 +156,7 @@ def edit_course(id):
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -224,7 +224,7 @@ def add_video(id):
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -268,7 +268,7 @@ def experiences():
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -314,7 +314,7 @@ def edit_experience(id):
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -380,7 +380,7 @@ def blogs():
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -425,7 +425,7 @@ def edit_blog(id):
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -493,7 +493,7 @@ def cards():
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -531,7 +531,7 @@ def edit_cards(id):
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -574,7 +574,7 @@ def carts():
     ).select_from(CartItem) \
         .join(Cart, CartItem.cart_id == Cart.id) \
         .join(Course, CartItem.course_id == Course.id) \
-        .filter(or_(Cart.status == 'In Progress', Cart.status == 'Delivered')) \
+        .filter((Cart.status == 'Approved')) \
         .scalar() or 0
     course_count = Course.query.count()
     user_count = User.query.count()
@@ -586,3 +586,31 @@ def carts():
     consult_count = Consult.query.filter(Consult.status == 'unread').count()
     return render_template("/admin/carts.html",verify_list = verify_list ,rejected_list = rejected_list ,  approved_list = approved_list , date=date, card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
                                user_count=user_count, consult_count=consult_count)
+
+@app.route("/admin/dashboard/carts/<int:id>",methods=['POST','GET'])
+def edit_cart(id):
+    cart = Cart.query.filter(Cart.id == id).first()
+    date = today()
+    total_sales = db.session.query(
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter(or_(Cart.status == 'Approved', Cart.status == 'Delivered')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+    if request.method == 'GET' : 
+        return render_template("/admin/edit-cart.html" , date=date, card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
+                               user_count=user_count, consult_count=consult_count , cart =cart)
+    else : 
+        status = request.form.get("status")
+        cart.status = status 
+        db.session.commit()
+
+        flash("success",f'وضعیت سبد خرید {cart.id} با موفقیت تغییر کرد .')
+        return redirect(url_for("admin.carts"))
