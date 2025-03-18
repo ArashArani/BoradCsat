@@ -14,12 +14,22 @@
             <img id="MenuBtn" src="/static/covers/img/icons8-menu-64.png" alt="">
             <img id="CloseBtn" src="/static/covers/img/icons8-close-48.png" alt="">
         </div>
-        <div>
-            <a href="/user/sign-up" class="h4">ثبت نام</a>
-        </div>
-        <div>
-            <a href="/user/login" class="h4 bu-btn">ورود</a>
-        </div>
+        {% if current_user.is_authencated %}
+            <div>
+                <a href="/user/sign-up" class="h4">ثبت نام</a>
+            </div>
+            <div>
+                <a href="/user/login" class="h4 bu-btn">ورود</a>
+            </div>
+        {% else %}
+            <div>
+                <a href="/user/dashboard" class="h4">داشبورد</a>
+            </div>
+            <div>
+                <a href="/cart" class="h4 bu-btn">سبد خرید</a>
+            </div>
+        {% endif %}
+        
     </div>
     <div class="header-res" id="HeaderRes">
         <div><a href="/user/login" class="h3 ">ورود</a></div>

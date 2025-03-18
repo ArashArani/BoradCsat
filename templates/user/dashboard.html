@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>داشبورد کاربران</title>
+{% endblock %}
+{% block body %}
+<body class="user-home">
+    {% include 'parts/header.html'   %}
+    <div class="user-dashboard">
+        <div class="user-side">
+            <div class="user-side-top">
+                <h1>حساب کاربری من </h1>
+            </div>
+            <div class="user-side-body">
+                <div><a  href="/user/dashboard" class=" user-side-active"><h5>داشبورد</h5></a></div>
+                <div><a href="/user/orders" class=""><h5>سفارشات</h5></a></div>
+                <div><a href="/user/discounts" class=""><h5>تخفیف های من</h5></a></div>
+                <div><a href="/user/account" class=""><h5>اطلاعات من</h5></a></div>
+                <div><a href="/user/log-out" class=""><h5>خروج از حساب</h5></a></div>
+            </div>
+        </div>
+        <div class="user-main">
+            <div class="user-main-top">
+                <h2>وضعیت سفارشات</h2>
+            </div>
+            <div class="user-main-body">
+                <div class="user-main-body-div">
+                    <a href="/user/orders">
+                        <div class="img">
+                            <img src="/static/covers/img/icons8-pending-96.png" alt="">
+                        </div>
+                        <div class="text">
+                            <h3>در انتظار تایید</h3>
+                            <h4><span>{{verify_count}}</span> سفارش</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="user-main-body-div">
+                    <a href="/user/orders/approved">
+                        <div class="img">
+                            <img src="/static/covers/img/icons8-approval-80.png" alt="">
+                        </div>
+                        <div class="text">
+                            <h3>تایید شده</h3>
+                            <h4><span>{{approved_count }}</span> سفارش</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="user-main-body-div">
+                    <a href="/user/orders/rejected">
+                        <div class="img">
+                            <img src="/static/covers/img/icons8-rejected-96.png" alt="">
+                        </div>
+                        <div class="text">
+                            <h3>تایید نشده </h3>
+                            <h4><span>{{rejected_count}}</span> سفارش</h4>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% include 'parts/footer.html'   %}
+</body>
+
+
+
+
+
+{% endblock %}

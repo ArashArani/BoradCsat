@@ -70,10 +70,20 @@ def login():
             if user != None :
                 if sha256_crypt.verify(password , user.password) :
                     flash("success","سلام ، خوش اومدی . ")
-                    return redirect("/")
+                    login_user(user)
+                    return redirect("/user/dashboard")
                 else :
                     flash("error",'مشکلی پیش آمده دوباره تلاش کنید . ')
                     return redirect("/user/login")
             else :
                 flash("error",'حسابی وجود ندارد ، یکی بساز . ')
                 return redirect("/user/sign-up")
+
+
+@app.route("/user/dashboard")
+@login_required
+def dashboard():
+    verify_count = current_user.carts.filter(Cart.status == 'Verify').count()
+    approved_count = current_user.carts.filter(Cart.status == 'Approved').count()
+    rejected_count = current_user.carts.filter(Cart.status == 'Rejected').count()
+    return render_template("/user/dashboard.html" , rejected_count = rejected_count , approved_count = approved_count , verify_count = verify_count)

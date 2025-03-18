@@ -40,7 +40,7 @@ def course(name):
 
     if current_user.is_authenticated:
         purchased_items = current_user.carts.filter(Cart.status == 'Success').join(
-            CartItem).filter(CartItem.product == c).all()
+            CartItem).filter(CartItem.course == c).all()
         return render_template("course-info.html",c=c ,other_course = other_course ,video_list = video_list , purchased_items = purchased_items)
     else :
         return render_template("course-info.html",c=c ,other_course = other_course ,video_list = video_list)
