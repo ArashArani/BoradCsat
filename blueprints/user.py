@@ -1,4 +1,4 @@
-from flask import Blueprint , abort , redirect , render_template , flash , request
+from flask import Blueprint , abort , redirect , render_template , flash , request , url_for
 
 from flask_login import login_required , login_user , logout_user , current_user
 
@@ -12,7 +12,9 @@ from models.cart_item import CartItem
 
 from models.discount import Discount 
 
-from models.course import Course
+from models.course import Course  
+
+from models.card import Card
 
 from models.course_video import CourseVideo
 
@@ -87,3 +89,86 @@ def dashboard():
     approved_count = current_user.carts.filter(Cart.status == 'Approved').count()
     rejected_count = current_user.carts.filter(Cart.status == 'Rejected').count()
     return render_template("/user/dashboard.html" , rejected_count = rejected_count , approved_count = approved_count , verify_count = verify_count)
+
+@app.route("/user/cart")
+@login_required
+def cart():
+    cart = current_user.carts.filter(Cart.status == 'pending').first()
+    return render_template("/user/cart.html",cart = cart)
+
+@app.route("/add-to-cart")
+@login_required
+def add_to_cart():
+    id = request.args.get("id")
+    course = Course.query.filter(Course.id == id).first()
+    cart = current_user.carts.filter(Cart.status == 'pending').first()
+    verify_cart = current_user.carts.filter(Cart.status == 'Verify').first()
+    if verify_cart is None :
+
+      
+        if cart is None:
+            cart = Cart()
+            current_user.carts.append(cart)
+            db.session.add(cart)
+
+        # بررسی اینکه آیا محصول قبلاً خریداری شده است
+        purchased_items = current_user.carts.filter(Cart.status == 'Approved').join(
+            CartItem).filter(CartItem.course == course).all()
+
+        if purchased_items:
+            flash('error', f'شما قبلاً این محصول را خریداری کرده‌اید و نمی‌توانید دوباره آن را به سبد خرید اضافه کنید.')
+            return redirect('/user/cart')
+
+        cart_item = cart.cart_items.filter(CartItem.course == course).first()
+
+        if cart_item is None:
+            item = CartItem(quantity=1)
+            item.price = course.price
+            item.discount_price = course.discount_price
+            item.final_price = course.final_price
+            item.cart = cart
+            item.course = course
+            db.session.add(item)
+        else:
+            flash(
+                'error', f'{cart_item.course.name} هم اکنون در سبد خرید می باشد . ')
+            return redirect(url_for('user.cart'))
+
+        db.session.commit()
+        flash('success', f'{course.name} با موفقیت به سبد خرید اضافه شد . ')
+
+        return redirect('/user/cart')
+
+    else:
+        flash('error', 'شما هنوز سبد خرید در انتظار تایید دارید . پس از تایید خرید میتوانید خرید دیگری انجام دهید . ')
+        return redirect('/')
+    
+@app.route("/delete-from-cart")
+def delete_from_cart():
+    id = request.args.get("id")
+    c = CartItem.query.filter(CartItem.id == id).first()
+    db.session.delete(c)
+    flash('success',f"{c.course.name} با موفقیت حذف شد . ")
+    db.session.commit()
+    return redirect(url_for("user.cart"))
+    
+@app.route("/user/payment")
+def payment():
+    card_count = Card.query.filter(Card.status == 'ON').count()
+    if card_count == 1 :
+        cart = current_user.carts.filter(Cart.status == 'pending').first()
+        card = Card.query.filter(Card.status == 'ON').first()
+        return render_template("/user/payment.html",cart = cart , card = card)
+    else : 
+        flash("error",'در حال حاضر پرداخت اینترنتی با مشکلی مواجه شده . بعدا تلاش کنید . ')
+        return redirect(url_for("user.cart"))
+
+@app.route("/verify-payment")
+@login_required
+def verify_payment():
+    id = request.args.get("id")
+    cart = Cart.query.filter(Cart.id == id).first()
+    cart.status = 'Verify'
+    db.session.commit()
+    flash("success",'وضعیت سبد خرید تغییر کرد ، به زودی دوره برات ثبت نام میشه . ')
+    return redirect(url_for("user.dashboard"))

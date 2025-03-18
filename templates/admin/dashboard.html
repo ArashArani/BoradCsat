@@ -192,7 +192,27 @@
                         <h4>آخرین خرید ها</h4>
                         <a class="h5" href="">همه</a>
                     </div>
-                    <div></div>
+                    <div class="admin-content-table-div-body">
+                        {% for i in order_list %}
+                        <div class="admin-table-row">
+                            <div class="admin-table-row-data">
+                                <h6>{{ i.user.username }}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <h6 class="price-toman">{{ i.final_price() }}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <h6>{{i.persian_status()}}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <a href="" class="h6">تغییر</a>
+                            </div>
+                            
+                            
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
                 </div>
                 <div class="admin-content-table-div">
                     <div class="admin-content-table-div-top">

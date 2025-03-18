@@ -6,18 +6,17 @@ class Cart(db.Model):
     __tablename__="carts"
     id = Column(Integer , primary_key= True)
     status = Column(String, default='pending')
-    address = Column(VARCHAR)
-    name = Column(VARCHAR)
-    city = Column(VARCHAR)
-    neighborhood = Column(VARCHAR)
-    post_code = Column(VARCHAR)
-    plaque = Column(INTEGER)
-    reciver_f_name = Column(VARCHAR)
-    reciver_l_name = Column(VARCHAR)
-    phone = Column(VARCHAR)
     user_id = Column(Integer,ForeignKey('users.id'),nullable=False)
     discount = Column(Integer , default=0)
     user = db.relationship('User',backref=backref('carts', lazy ='dynamic'))
+
+    def persian_status(self):
+        if self.status == 'Verify' : 
+            return "در انتظار تایید"
+        elif self.status == 'Approved' :
+            return "تایید شده "
+        elif self.status == 'Rejected' :
+            return "تایید نشده"
 
     
     def total_price(self):

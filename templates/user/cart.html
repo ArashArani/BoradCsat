@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>سبد خرید </title>
+{% endblock %}
+{% block body %}
+<body class="user-home">
+    {% include 'parts/header.html'   %}
+    {% if cart.cart_items | list | length > 0  %}
+        <div class="user-cart">
+            <div class="user-cart-top">
+                <h1>سبد خرید شما</h1>
+            </div>
+            <div class="user-cart-body">
+                <div class="user-cart-body-items">
+                    {% for i in cart.cart_items %}
+                        <div class="cart-card">
+                            <div class="cart-card-img">
+                                <img src="/static/covers/courses/{{i.course.name}}.webp" alt="{{i.course.name}}">
+                                <span class="h5 off-span">%{{i.course.discount}} </span>
+                            </div>
+                            <div class="cart-card-name">
+                                <h2>{{i.course.name}}</h2>
+                            </div>
+                            <div class="cart-card-price">
+                                <h3 class="discount-price price-toman">{{i.course.price}}</h3>
+                                <h3 class="price-toman">{{i.course.final_price}}</h3>
+                            </div>
+                            <div class="cart-card-btn">
+                                <a href="/delete-from-cart?id={{i.id}}" class="remove-cart h3">حذف</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="user-cart-body-price">
+                    <div>
+                        <h4>مبلغ کل</h4>
+                        <h4 class="price-toman">{{cart.total_price() }}</h4>
+                    </div>
+                    
+                    <div class="discount">
+                        <h4>کل تخفیف</h4>
+                        <h4 class="price-toman">{{cart.total_discount() }}</h4>
+                    </div>
+                    
+                    <div>
+                        <h4>مبلغ پرداختی</h4>
+                        <h4 class="price-toman">{{cart.final_price() }}</h4>
+                    </div>
+                    
+                    <div>
+                        <a href="/user/payment" class="bu-btn h4">تایید و پرداخت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h1 style="text-align: center; margin: 4rem auto ; color: var(--admin-color-gray);">
+            سبد خرید شما خالی است 
+        </h1>
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+    {% include 'parts/footer.html'   %}
+</body>
+{% endblock %}

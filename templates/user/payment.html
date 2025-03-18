@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block header %}
+<title>پرداخت سبد خرید</title>
+{% endblock %} {% block body %}
+<body class="user-home">
+  {% include 'parts/header.html' %}
+
+  <div class="user-cart">
+    <div class="user-cart-top">
+      <h3 class="h1">توجه #{{cart.id}}</h3>
+      <h2>
+        متاسفانه پرداخت اینترنتی در دسترس نیست . برای پرداخت مبلغ پرداختی را به
+        کارت زیر انتقال دهید و اسکرین شات این صفحه و رسید پرداخت را برای
+        <a href="https://wa.me/+989128705263">واتساپ ما </a> ارسال کنید
+      </h2>
+    </div>
+    <div class="user-cart-body">
+      <div class="user-cart-body-items">
+        <div class="card-card">
+          <div>
+            <h2>{{card.card_owner}}</h2>
+          </div>
+          <div>
+            <h2 id="CardNumber">{{card.card_number}}</h2>
+          </div>
+          <div class="card-info-value">
+            <button class="h4 bu-btn" onclick="CopyText()">
+              کپی کردن شماره کارت
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="user-cart-body-price">
+        <div>
+          <h4>مبلغ کل</h4>
+          <h4 class="price-toman">{{cart.total_price() }}</h4>
+        </div>
+
+        <div class="discount">
+          <h4>کل تخفیف</h4>
+          <h4 class="price-toman">{{cart.total_discount() }}</h4>
+        </div>
+
+        <div>
+          <h4>مبلغ پرداختی</h4>
+          <h4 class="price-toman">{{cart.final_price() }}</h4>
+        </div>
+
+        <div>
+          <a href="/verify-payment?id={{cart.id}}" class="bu-btn h4"
+            >پرداخت کردم</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'parts/footer.html' %}
+</body>
+{% endblock %}

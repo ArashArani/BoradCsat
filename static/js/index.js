@@ -1,12 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
   const PriceUSD = document.querySelectorAll(".price-toman");
+  const MenuBtn = document.getElementById("MenuBtn");
+  const CloseBtn = document.getElementById("CloseBtn");
+  const HeaderRes = document.getElementById("HeaderRes");
   PriceUSD.forEach((item) => {
     const priceValue = Number(item.innerText);
     if (!isNaN(priceValue)) {
       item.innerText = priceValue.toLocaleString() + " تومان ";
     }
   });
-  
+  MenuBtn.addEventListener("click",()=>{
+    HeaderRes.style.top = '0';
+    CloseBtn.style.display = 'flex';
+    MenuBtn.style.display = 'none'
+  })
+  CloseBtn.addEventListener("click",()=>{
+    HeaderRes.style.top = '-120vh';
+    CloseBtn.style.display = 'none';
+    MenuBtn.style.display = 'flex'
+  })
 });
 
 function calculateFinalPrice() {
@@ -24,28 +36,8 @@ function calculateFinalPrice() {
 }
 calculateFinalPrice();
 
-function CopyText(index) {
-  let textToCopy;
-
-  // انتخاب متن بر اساس index
-  switch (index) {
-    case 1:
-      textToCopy = document.querySelectorAll(".card-info-value h4")[0]
-        .innerText; // Account Name
-      break;
-    case 2:
-      textToCopy = document.querySelectorAll(".card-info-value h4")[1]
-        .innerText; // Sort Code
-      break;
-    case 3:
-      textToCopy = document.querySelectorAll(".card-info-value h4")[2]
-        .innerText; // Account Number
-      break;
-    default:
-      return;
-  }
-
-  // ایجاد یک عنصر textarea موقت
+function CopyText(){
+  var textToCopy = document.getElementById("CardNumber").innerText ;
   var tempInput = document.createElement("textarea");
   tempInput.value = textToCopy;
   document.body.appendChild(tempInput);
@@ -58,11 +50,5 @@ function CopyText(index) {
   document.body.removeChild(tempInput);
 
   // پیام تایید
-  alert("Text copied to clipboard: " + textToCopy);
+  alert(textToCopy + " کپی شد . ");
 }
-
-document.addEventListener("DOMContentLoaded", ()=> {
- 
-
-
-});

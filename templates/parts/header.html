@@ -32,8 +32,14 @@
         
     </div>
     <div class="header-res" id="HeaderRes">
-        <div><a href="/user/login" class="h3 ">ورود</a></div>
-        <div><a href="/user/sign-up" class="h3">ثبت نام</a></div>
+        {% if current_user.is_authencated %}
+            <div><a href="/user/login" class="h3 ">ورود</a></div>
+            <div><a href="/user/sign-up" class="h3">ثبت نام</a></div>
+        {% else %}
+        <div><a href="/user/dashboard" class="h3 ">داشبورد</a></div>
+        <div><a href="/user/cart" class="h3">سبد خرید</a></div>
+        {% endif %}
+        
         <div><a href="" class="h3">مشاوره</a></div>
         <div><a href="" class="h3">دوره ها </a></div>
         <div><a href="" class="h3">تجربه ها</a></div>
