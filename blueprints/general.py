@@ -105,3 +105,8 @@ def blogs():
 def exp():
     exp_list = Experience.query.all()
     return render_template("exp.html",exp_list = exp_list)
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
