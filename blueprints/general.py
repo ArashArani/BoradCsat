@@ -88,3 +88,20 @@ def blog_info(name):
 def exp_info(name):
     blog = Experience.query.filter(Experience.name == name).first()
     return render_template("exp-info.html", blog= blog)
+
+
+@app.route("/courses")
+def courses():
+    course_list = Course.query.all()
+    return render_template("courses.html",course_list = course_list)
+
+@app.route("/blogs")
+def blogs():
+    blog_list = Blog.query.all()
+    return render_template("blogs.html",blog_list = blog_list)
+
+
+@app.route("/experiences")
+def exp():
+    exp_list = Experience.query.all()
+    return render_template("exp.html",exp_list = exp_list)

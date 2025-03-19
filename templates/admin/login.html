@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block header %}
     <title>پنل مدیریت</title>
+    <link rel="manifest" href="/static/js/manifest.json" />
+
 {% endblock %}
 {% block body %}
 <body style="background-color: #000;">
@@ -37,4 +39,24 @@
         </div>
     </div>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // بررسی اینکه آیا اپلیکیشن در حالت Standalone اجرا می‌شود
+      const isPWA = window.matchMedia("(display-mode: standalone)").matches;
+  
+      // اگر کاربر PWA نیست و از مرورگر غیر PWA استفاده می‌کند، به صفحه اطلاع‌رسانی هدایت کنید
+      if (!isPWA) {
+        // بررسی User-Agent برای مرورگرهای غیر PWA
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isMobile = /mobile/i.test(userAgent);
+        const isSafari = /safari/i.test(userAgent);
+  
+        // اگر کاربر از مرورگر موبایل غیر PWA (مثل Safari) استفاده می‌کند
+        if (isMobile && isSafari) {
+          window.location.href = "/pwa";
+        }
+      }
+    });
+  </script>
 {% endblock %}

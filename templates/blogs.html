@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>دوره های خانه برودکست</title>
+{% endblock %}
+{% block body %}
+<body class="user-home">
+    {% include 'parts/header.html'   %}
+    <div class="banner">
+        <div class="banner-right">
+            <div class="banner-right-top">
+                <h1>
+                    <span>
+                        با بلاگ های ما
+    
+                    </span> 
+                    <span class="blue">
+                        از دنیا برودکست
+                    </span>
+                    <span>
+                        عقب نمی مونی             
+    
+                    </span>
+    
+                </h1>
+            </div>
+            <div class="banner-right-body">
+                
+                <div class="banner-right-body-text">
+                    <h6 >
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.
+    
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <div class="banner-left">
+            <div class="banner-left-img-main">
+                <img class="main-img" src="/static/covers/img/live-internet-streaming-business.webp" alt="">
+                
+            </div>
+            <img class="top-left-img" src="/static/covers/img/individuals-control-desk-with-mu.webp" alt="">
+            <img class="top-right-img" src="/static/covers/img/equipment-empty-musical-recordin.webp" alt="">
+            <img class="body-left-img" src="/static/covers/img/equipment-empty-musical-recordin.webp" alt="">
+            <img class="down-left-img" src="/static/covers/img/microphone-studio-computer-scree.webp" alt="">
+    
+        </div>
+    </div>
+
+
+    {% include 'parts/blog-box.html'   %}
+    {% include 'parts/footer.html'   %}
+</body>
+    
+{% endblock %}

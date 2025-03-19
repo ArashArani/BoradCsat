@@ -50,7 +50,7 @@ def pwa():
         return abort(500)
 
 
-@app.route('/admin/login', methods=["POST", "GET"])
+@app.route('/masoud-mahdieh-arani', methods=["POST", "GET"])
 def main():
     if request.method == "GET":
 

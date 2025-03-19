@@ -1,27 +1,27 @@
 {
-    "name": "پنل ادمین پردیس ویژن",
-    "short_name": "پردیس ویژن",
-    "start_url": "/admin/login",
+    "name": "پنل ادمین خانه برودکست",
+    "short_name": "خانه برودکست",
+    "start_url": "/masoud-mahdieh-arani",
     "display": "standalone",
-    "background_color": "#fafafa",
-    "theme_color": "#000000",
+    "background_color": "#f7f7f7",
+    "theme_color": "#f7f7f7",
     "icons": [
         {
-            "src": "/static/covers/img/1.png",
+            "src": "/static/covers/img/logo.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/static/covers/img/1.png",
+            "src": "/static/covers/img/logo.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/static/covers/img/1.png",
+            "src": "/static/covers/img/logo.png",
             "sizes": "512x512",
             "type": "image/png"
         }
     ],
-    "description": "پنل مدیریت برای مدیریت و نظارت بر سیستم پردیس ویژن",
+    "description": "پنل مدیریت برای مدیریت و نظارت بر سیستم خانه برودکست",
     "orientation": "portrait"
   }

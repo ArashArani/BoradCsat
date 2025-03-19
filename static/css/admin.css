@@ -1663,6 +1663,9 @@ summary::marker{
 }
 
 @media screen and (max-width: 1023px) {
+  .admin-login-box{
+    width: 100%;
+  }
   .admin-sidebar {
     width: calc(25% - 1rem);
   }
