@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>سفارش های من</title>
+{% endblock %}
+{% block body %}
+<body class="user-home">
+    {% include 'parts/header.html'   %}
+    <div class="user-dashboard">
+        <div class="user-side">
+            <div class="user-side-top">
+                <h1>حساب کاربری من </h1>
+            </div>
+            <div class="user-side-body">
+                <div><a  href="/user/dashboard" class=" "><h5>داشبورد</h5></a></div>
+                <div><a href="/user/orders" class="user-side-active"><h5>سفارشات</h5></a></div>
+                <div><a href="/user/account" class=""><h5>اطلاعات من</h5></a></div>
+                <div><a href="/user/log-out" class=""><h5>خروج از حساب</h5></a></div>
+            </div>
+        </div>
+        <div class="user-main">
+            
+            <div class="user-order-top">
+                <div class="user-order-top-text   active-order">
+                    <a class="h3" href="/user/orders">در انتظار تایید <span>{{verify_count}}</span></a>
+                </div>
+                <div class="user-order-top-text  ">
+                    <a class="h3" href="/user/orders/approved">تایید شده <span>{{approved_count}}</span></a>
+                </div>
+                <div class="user-order-top-text  ">
+                    <a class="h3" href="/user/orders/rejected">تایید نشده <span>{{rejected_count}}</span></a>
+                </div>
+                
+            </div>
+            <div class="user-order-main">
+                {% for i in cart_list %}
+                    <a href="/user/orders/{{i.id}}" class="order-card">
+                        <div class="order-card-top">
+                            <div class="order-card-top-right">
+                                <div class="order-card-top-right-img">
+                                    <img src="/static/covers/img/icons8-pending-96.png" alt="">
+                                </div>
+                                <div class="order-card-top-right-text">
+                                    <h3>شماره سفارش : #{{i.id}}</h3>
+                                </div>
+                            </div>
+                            <div class="order-card-top-left">
+                                <h3 class="price-toman">{{ i.final_price() }}</h3>
+                            </div>
+                        </div>
+                        <div class="order-card-body">
+                            {% for c in i.cart_items %}
+                                <div>
+                                    <img src="/static/covers/courses/{{c.course.name}}.webp" alt="">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% include 'parts/footer.html'   %}
+</body>
+
+
+
+
+
+{% endblock %}

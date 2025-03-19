@@ -203,3 +203,30 @@ def see_video(name, id):
 
     # Render the video view template
     return render_template('video.html', video=video)
+
+@app.route("/user/orders")
+@login_required
+def orders():
+    cart_list = current_user.carts.filter(Cart.status == "Verify").all()
+    verify_count = current_user.carts.filter(Cart.status == 'Verify').count()
+    approved_count = current_user.carts.filter(Cart.status == 'Approved').count()
+    rejected_count = current_user.carts.filter(Cart.status == 'Rejected').count()
+    return render_template("/user/orders.html" , cart_list = cart_list ,rejected_count = rejected_count , approved_count = approved_count , verify_count = verify_count)
+
+@app.route("/user/orders/approved")
+@login_required
+def approved_orders():
+    cart_list = current_user.carts.filter(Cart.status == "Approved").all()
+    verify_count = current_user.carts.filter(Cart.status == 'Verify').count()
+    approved_count = current_user.carts.filter(Cart.status == 'Approved').count()
+    rejected_count = current_user.carts.filter(Cart.status == 'Rejected').count()
+    return render_template("/user/orders-approved.html" , cart_list = cart_list ,rejected_count = rejected_count , approved_count = approved_count , verify_count = verify_count)
+
+@app.route("/user/orders/rejected")
+@login_required
+def rejected_orders():
+    cart_list = current_user.carts.filter(Cart.status == "Rejected").all()
+    verify_count = current_user.carts.filter(Cart.status == 'Verify').count()
+    approved_count = current_user.carts.filter(Cart.status == 'Approved').count()
+    rejected_count = current_user.carts.filter(Cart.status == 'Rejected').count()
+    return render_template("/user/orders-rejected.html" , cart_list = cart_list ,rejected_count = rejected_count , approved_count = approved_count , verify_count = verify_count)

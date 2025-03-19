@@ -14,30 +14,31 @@
             <img id="MenuBtn" src="/static/covers/img/icons8-menu-64.png" alt="">
             <img id="CloseBtn" src="/static/covers/img/icons8-close-48.png" alt="">
         </div>
-        {% if current_user.is_authencated %}
-            <div>
-                <a href="/user/sign-up" class="h4">ثبت نام</a>
-            </div>
-            <div>
-                <a href="/user/login" class="h4 bu-btn">ورود</a>
-            </div>
+        {% if current_user.is_authenticated %}
+        <div>
+            <a href="/user/dashboard" class="h4">داشبورد</a>
+        </div>
+        <div>
+            <a href="/cart" class="h4 bu-btn">سبد خرید</a>
+        </div>
+            
         {% else %}
-            <div>
-                <a href="/user/dashboard" class="h4">داشبورد</a>
-            </div>
-            <div>
-                <a href="/cart" class="h4 bu-btn">سبد خرید</a>
-            </div>
+        <div>
+            <a href="/user/sign-up" class="h4">ثبت نام</a>
+        </div>
+        <div>
+            <a href="/user/login" class="h4 bu-btn">ورود</a>
+        </div>
         {% endif %}
         
     </div>
     <div class="header-res" id="HeaderRes">
-        {% if current_user.is_authencated %}
-            <div><a href="/user/login" class="h3 ">ورود</a></div>
-            <div><a href="/user/sign-up" class="h3">ثبت نام</a></div>
-        {% else %}
+        {% if current_user.is_authenticated %}
         <div><a href="/user/dashboard" class="h3 ">داشبورد</a></div>
         <div><a href="/user/cart" class="h3">سبد خرید</a></div>
+        {% else %}
+        <div><a href="/user/login" class="h3 ">ورود</a></div>
+        <div><a href="/user/sign-up" class="h3">ثبت نام</a></div>
         {% endif %}
         
         <div><a href="" class="h3">مشاوره</a></div>
