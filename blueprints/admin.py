@@ -615,3 +615,23 @@ def edit_cart(id):
 
         flash("success",f'وضعیت سبد خرید {cart.id} با موفقیت تغییر کرد .')
         return redirect(url_for("admin.carts"))
+    
+@app.route("/admin/dashboard/consults")
+def consults():
+    date = today()
+    total_sales = db.session.query(
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter((Cart.status == 'Approved')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    consult_list = Consult.query.all()
+    user_count = User.query.count()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+    return render_template("/admin/consults.html", date=date, consult_list = consult_list,card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
+                               user_count=user_count, consult_count=consult_count)

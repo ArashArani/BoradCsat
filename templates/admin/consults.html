@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>مشاوره ها</title>
+{% endblock %}
+{% block body %}
+<body>
+    <div class="admin-page">
+        <div class="admin-sidebar">
+            <div class="admin-sidebar-top">
+                <img id="AdminLogo" src="/static/covers/img/logo.png" alt="">
+                <h2>خانه برودکست</h2>
+            </div>
+            <div class="admin-sidebar-body">
+                <div class="admin-sidebar-body-link ">
+                    <a href="/admin/dashboard">
+                        <img src="/static/covers/img/dashboard-w.png" alt="">
+                        <h6>داشبورد</h6>
+
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/courses">
+
+                        <img src="/static/covers/img/course-w.png" alt="">
+                        <h6>دوره ها</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/experiences">
+
+                        <img src="/static/covers/img/experience-w.png" alt="">
+                        <h6>تجربه ها</h6>
+
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link ">
+                    <a href="/admin/dashboard/carts">
+
+                        <img src="/static/covers/img/cart-w.png" alt="">
+                        <h6>سفارشات</h6>
+                        {% if cart_count > 0 %}
+                        <div>
+
+                            <h6 class="alert h7">{{cart_count}}</h6>
+                        </div>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/users">
+
+                        <img src="/static/covers/img/user-w.png" alt="">
+                        <h6>کاربران</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/blogs">
+
+                        <img src="/static/covers/img/blog-w.png" alt="">
+                        <h6>بلاگ ها</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link sidebar-active">
+                    <a href="/admin/dashboard/consults">
+
+                        <img src="/static/covers/img/chat-b.png" alt="">
+                        <h6>مشاوره ها</h6>
+                        {% if consult_count > 0 %}
+                        <div>
+
+                            <h6 class="alert h7">{{consult_count}}</h6>
+                        </div>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/dashboard/cards">
+
+                        <img src="/static/covers/img/card-w.png" alt="">
+                        <h6>کارت ها</h6>
+                        {% if card_count != 1 %}
+                            <div>
+
+                                <h6 class="alert h7"></h6>
+                            </div>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            <div class="admin-sidebar-down">
+                <div class="admin-sidebar-body-link">
+                    <a href="/admin/logout">
+
+                        <img src="/static/covers/img/logout-w.png" alt="">
+                        <h6>خروج از حساب</h6>
+                    </a>
+                </div>
+                <div class="admin-sidebar-down-account">
+                    <div class="admin-sidebar-down-account-img">
+                        <img src="/static/covers/img/masoud.jpg" alt="">
+                    </div>
+                    <div class="admin-sidebar-down-account-role">
+                        <h4>مسعود مهدیه آرانی</h4>
+                        <h6>مدیر مجموعه</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="admin-content">
+            <div class="admin-content-top">
+                <div class="admin-content-top-name">
+                    <h1>مشاوره ها</h1>
+                    <h4>{{date}}</h4>
+                </div>
+                <div class="admin-content-top-search">
+                    <form action="/admin/search">
+                        <input type="text" name="query" placeholder="جستوجو کن . . .">
+                        <button type="submit"><img src="/static/covers/img/search.png"></button>
+                    </form>
+                </div>
+                <div class="admin-content-top-date">
+                    <h4>{{date}}</h4>
+                </div>
+            </div>
+            <div class="admin-content-box">
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>کل فروش</h5>
+                        <div>
+                            <img src="/static/covers/img/icons8-wallet-50.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h4 class="price-toman">
+                            
+                            {{total_sales}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>دوره ها </h5>
+                        <div>
+
+                            <img src="/static/covers/img/icons8-course-50.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>
+                            
+                            {{course_count}}
+
+                        </h3>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>کاربران</h5>
+                        <div>
+
+                            <img src="/static/covers/img/icons8-user-48.png" alt="">
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>
+                            
+                            {{user_count}}
+
+                        </h3>
+                    </div>
+                </div>
+                <div class="admin-content-box-div">
+                    <div class="admin-content-box-div-top">
+                        <h5>مشاوره ها </h5>
+                        <div>
+                            <img src="/static/covers/img/icons8-chat-60.png" alt="">
+
+                        </div>
+                    </div>
+                    <div class="admin-content-box-div-body">
+                        <h3>
+                            
+                            {{consult_count}}
+                        
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-content-table">
+                
+                <div class="admin-content-table-div admin-content-table-div-edit">
+                    <div class="admin-content-table-div-top">
+                        <h4>مشاوره ها</h4>
+                    </div>
+                    <div class="admin-content-table-div-body">
+                        {% for i in consult_list %}
+                        
+                        <div class="admin-table-row">
+                               
+                            <div class="admin-table-row-data">
+                                <h6>{{i.f_name}} {{i.l_name}}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <h6>{{i.subject | truncate(10) }}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <h6>{{i.persian_status()}}</h6>
+                            </div>
+                            <div class="admin-table-row-data">
+                                <a href="/admin/dashboard/consults/{{i.id}}" class="h6">تغییر</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</body>
+
+{% endblock %}
