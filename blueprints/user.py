@@ -236,3 +236,9 @@ def rejected_orders():
 def order_info(id):
     cart = current_user.carts.filter(Cart.id == id).first_or_404()
     return render_template("/user/order-info.html",cart = cart)
+
+@app.route("/user/log-out")
+def log_out():
+    logout_user()
+    flash("success",'با موفقیت خارج شدید . ')
+    return redirect("/")

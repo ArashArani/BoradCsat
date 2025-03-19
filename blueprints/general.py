@@ -75,3 +75,16 @@ def consult():
         else :
             flash("error",f'{f_name} عزیز ، شما درخواست برسی نشده دارید . ')
             return redirect("/")
+        
+
+
+@app.route("/blogs/<name>")
+def blog_info(name):
+    blog = Blog.query.filter(Blog.name == name).first()
+    blog_list = Blog.query.filter(Blog.name != name).order_by(func.random()).limit(4).all()
+    return render_template("blog-info.html",blog = blog , blog_list = blog_list)
+
+@app.route("/experiences/<name>")
+def exp_info(name):
+    blog = Experience.query.filter(Experience.name == name).first()
+    return render_template("exp-info.html", blog= blog)

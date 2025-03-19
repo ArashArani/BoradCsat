@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>{{blog.name}}</title>
+{% endblock %}
+{% block body %}
+<body class="user-home">
+    {% include 'parts/header.html'   %}
+    <div class="blog-page">
+        <div class="blog-content exp-content">
+            <div class="blog-top">
+                <div class="blog-top-img">
+                    <img src="/static/covers/exp/{{blog.name}}1.webp" alt="{{blog.en_name}}">
+                </div>
+                <div class="blog-top-text">
+                    <div>
+                        <h1>
+                            {{blog.name}}
+                        </h1>
+                    </div>
+                    <div>
+                        <h2 class="h4">
+
+
+                            در این مقاله به چگونگی {{blog.name}} میپردازیم . همراه ما تا پایان این مقاله باشید . 
+                            در پایان این مقاله به تمامی سوالات شما در مورد {{blog.name}} پاسخ میدهیم 
+                        </h2>
+                    </div>
+                    <div >
+                        <p class="h5">نویسنده :  {{blog.author}} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-body">
+                <div class="blog-body-text">
+                    <h3>{{blog.long_desc}}</h3>
+                </div>
+                
+                <div class="blog-body-text">
+                    <h3>{{blog.long_desc}}</h3>
+                </div>
+                <div class="blog-body-img">
+
+                    <div>
+                        <img src="/static/covers/exp/{{blog.name}}2.webp" alt="{{blog.name}}">
+                    </div>
+                   
+                </div>
+
+
+
+
+                <div class="faq-box">
+
+                    <div class="faq"> 
+                        <details>
+                            <summary class="h3">{{blog.question1}}</summary>
+                            <p class="h4">{{blog.awnser1}}</p>
+                        </details>
+                   </div>
+                   <div class="faq"> 
+                        <details>
+                            <summary class="h3">{{blog.question2}}</summary>
+                            <p class="h4">{{blog.awnser2}}</p>
+                        </details>
+                   </div>
+                
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+  
+    {% include 'parts/footer.html'   %}
+</body>
+{% endblock %}
