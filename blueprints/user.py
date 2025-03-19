@@ -172,3 +172,34 @@ def verify_payment():
     db.session.commit()
     flash("success",'وضعیت سبد خرید تغییر کرد ، به زودی دوره برات ثبت نام میشه . ')
     return redirect(url_for("user.dashboard"))
+
+
+@app.route('/courses/<name>/<int:id>')
+@login_required
+def see_video(name, id):
+
+    course = Course.query.filter(Course.name == name).first()
+
+    carts = current_user.carts.filter(Cart.status == 'Approved').all()
+
+    item = None
+    for cart in carts:
+        item = cart.cart_items.filter(CartItem.course == course).first()
+        if item:
+            break
+
+    if item is None:
+        flash('error', 'شما دانشجو این دوره نیستید.')
+        return redirect(f'/course/{course.name}')
+
+    # Retrieve the video based on the ID
+    video = CourseVideo.query.filter(CourseVideo.id == id).first()
+
+    # Check if the video exists
+    if not video:
+        flash('error','ویدئو مورد نظر یافت نشد')
+        # Redirect to the courses page
+        return redirect(f'/course/{course.name}')
+
+    # Render the video view template
+    return render_template('video.html', video=video)

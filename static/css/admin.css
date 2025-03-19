@@ -1219,6 +1219,7 @@ footer {
       color: var(--admin-color-gray);
       span{
         color: var(--admin-color-blue);
+        font-weight: 900;
       }
     }
   }
@@ -1327,9 +1328,31 @@ footer {
     color: var(--admin-color-pink);
   }
 }
+.video-box{
+  width: calc(100% - 2rem);
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
-
-
+.video-box-video{
+  width: calc(900px - 2rem);
+  margin: auto;
+  aspect-ratio: 16/9;
+  video{
+    width: 100%;
+  }
+}
+.video-box-desc{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin: auto;
+  width: calc(100% - 4rem);
+  color: var(--admin-color-gray);
+}
 .off-span{
   position: absolute;
   top: 0;
@@ -1724,5 +1747,8 @@ footer {
       text-align: center;
       width: 100%;
     }
+  }
+  .video-box-video{
+    width: calc(100% - 2rem);
   }
 }

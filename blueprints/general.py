@@ -39,7 +39,7 @@ def course(name):
     other_course = Course.query.filter(Course.name != name).order_by(func.random()).limit(1).all()
 
     if current_user.is_authenticated:
-        purchased_items = current_user.carts.filter(Cart.status == 'Success').join(
+        purchased_items = current_user.carts.filter(Cart.status == 'Approved').join(
             CartItem).filter(CartItem.course == c).all()
         return render_template("course-info.html",c=c ,other_course = other_course ,video_list = video_list , purchased_items = purchased_items)
     else :

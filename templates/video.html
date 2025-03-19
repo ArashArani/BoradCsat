@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>{{video.name}}</title>
+{% endblock %}
+{% block body %}
+<body class="user-home">
+    {% include 'parts/header.html'   %}
+    <div class="video-box">
+        <div class="video-box-video">
+            <video src="{{video.link}}" controls contextmenu="nodownload"></video>
+        </div>
+        <div class="video-box-desc">
+            <h1>{{video.name}}</h1>
+            <h3>{{video.short_desc}}</h3>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+    {% include 'parts/footer.html'   %}
+
+</body>
+
+
+
+
+
+
+
+
+
+{% endblock %}
