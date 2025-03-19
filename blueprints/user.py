@@ -230,3 +230,9 @@ def rejected_orders():
     approved_count = current_user.carts.filter(Cart.status == 'Approved').count()
     rejected_count = current_user.carts.filter(Cart.status == 'Rejected').count()
     return render_template("/user/orders-rejected.html" , cart_list = cart_list ,rejected_count = rejected_count , approved_count = approved_count , verify_count = verify_count)
+
+@app.route("/user/orders/<int:id>")
+@login_required
+def order_info(id):
+    cart = current_user.carts.filter(Cart.id == id).first_or_404()
+    return render_template("/user/order-info.html",cart = cart)

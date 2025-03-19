@@ -1453,6 +1453,40 @@ footer {
     }
   }
 }
+.user-order-main{
+  
+  .admin-content-table-div{
+
+    background-color: var(--user-color-black);
+    .admin-content-table-div-top , .admin-content-table-div-body{
+      width: calc(100% - 2rem);
+      h4{
+
+        color: var(--admin-color-gray) !important;
+      }
+
+    }
+    
+    .cart-card{
+      div{
+
+        color: var(--admin-color-gray) !important;
+      }
+      .cart-card-price{
+        width: calc(30% - 1rem);
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
 
 .bu-btn {
   width: 100%;
@@ -1829,5 +1863,10 @@ footer {
   }
   .video-box-video {
     width: calc(100% - 2rem);
+  }
+  .user-order-main{
+    .cart-card-price {
+      width: 100% !important;
+    }
   }
 }

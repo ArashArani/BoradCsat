@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>سفارش های من</title>
+{% endblock %}
+{% block body %}
+<body class="user-home">
+    {% include 'parts/header.html'   %}
+    <div class="user-dashboard">
+        <div class="user-side">
+            <div class="user-side-top">
+                <h1>حساب کاربری من </h1>
+            </div>
+            <div class="user-side-body">
+                <div><a  href="/user/dashboard" class=" "><h5>داشبورد</h5></a></div>
+                <div><a href="/user/orders" class="user-side-active"><h5>سفارشات</h5></a></div>
+                <div><a href="/user/account" class=""><h5>اطلاعات من</h5></a></div>
+                <div><a href="/user/log-out" class=""><h5>خروج از حساب</h5></a></div>
+            </div>
+        </div>
+        <div class="user-main">
+            
+            <div class="user-main-top">
+                <h2>وضعیت سفارشات</h2>
+            </div>
+            <div class="user-order-main">
+                <div class="admin-content-table-div admin-content-table-div-edit">
+                    <div class="admin-content-table-div-top">
+                        <h4>سفارش شماره ی # {{cart.id}}</h4>
+                        <h4 class="price-toman">{{cart.final_price()}}</h4>
+                    </div>
+                    <div class="admin-content-table-div-body">
+                        {% for i in cart.cart_items %}
+                        <div class="cart-card">
+                            <div class="cart-card-img">
+                                <img src="/static/covers/courses/{{i.course.name}}.webp" alt="{{i.course.name}}">
+                                <span class="h5 off-span">%{{i.course.discount}} </span>
+                            </div>
+                            <div class="cart-card-name">
+                                <h2>{{i.course.name}}</h2>
+                            </div>
+                            <div class="cart-card-price">
+                                <h3 class="discount-price price-toman">{{i.course.price}}</h3>
+                                <h3 class="price-toman">{{i.course.final_price}}</h3>
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% include 'parts/footer.html'   %}
+</body>
+
+
+
+
+
+{% endblock %}
