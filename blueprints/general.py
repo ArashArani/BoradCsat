@@ -11,6 +11,8 @@ from models.user import User
 
 from models.cart import *
 
+from models.consults import Consult
+
 from models.cart_item import CartItem
 
 from models.experience import Experience
@@ -45,3 +47,31 @@ def course(name):
     else :
         return render_template("course-info.html",c=c ,other_course = other_course ,video_list = video_list)
     
+
+@app.route("/consults",methods=['POST','GET'])
+def consult():
+    if request.method == 'GET' :
+        return render_template("consults.html")
+    else : 
+        f_name = request.form.get("f_name")
+        l_name = request.form.get("l_name")
+        phone = request.form.get("phone")
+        subject = request.form.get("subject")
+        text = request.form.get("text")
+
+        consult = Consult.query.filter(Consult.phone == phone).filter(Consult.status == 'unread').first()
+        if consult is None :
+            c = Consult()
+            c.f_name = f_name
+            c.l_name = l_name
+            c.phone = phone
+            c.status = 'unread'
+            c.subject = subject
+            c.text = text
+            db.session.add(c)
+            db.session.commit()
+            flash("success",f'{f_name} عزیر ، درخواست مشاوره شما با موفقیت ثبت شد . ')
+            return redirect("/")
+        else :
+            flash("error",f'{f_name} عزیز ، شما درخواست برسی نشده دارید . ')
+            return redirect("/")

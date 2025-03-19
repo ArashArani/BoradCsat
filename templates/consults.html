@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block header %}
+    <title>مشاوره از خانه برودکست</title>
+{% endblock %}
+{% block body %}
+    <body class="user-home">
+        {% include 'parts/header.html'   %}
+        <div class="user-main">
+            <div class="user-main-top">
+                <h1>درخواست مشاوره</h1>
+            </div>
+            <div class="user-main-consults">
+               <div class="consults-text">
+                    <h2>به وبسایت ما خوش آمدید! ما در زمینه برودکست، تصویر برداری و ساخت واحد سیار تخصص داریم و آماده‌ایم تا به شما در هر زمینه‌ای که نیاز دارید کمک کنیم.
+
+                        اگر به دنبال مشاوره در مورد تجهیزات، تکنیک‌های تصویر برداری، یا راه‌اندازی واحد سیار هستید، ما اینجا هستیم تا به سوالات شما پاسخ دهیم و راهنمایی‌های لازم را ارائه دهیم.
+                        
+                        با ما تماس بگیرید و بگذارید تا با هم به بهترین راه‌حل‌ها دست یابیم!
+                    </h2>
+               </div>
+               <div>
+                    <div class="admin-content-table-form">
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">نام</label>
+                                    <input type="text" name="f_name" placeholder="مثال : آرش " class="h5">
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">نام خانوادگی</label>
+                                    <input type="text" name="l_name" placeholder="مثال : آرانی" class="h5">
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="form-row-input">
+                                    <label for="" class="h6">شماره تماس</label>
+                                    <input type="tel" maxlength="11" name="phone" placeholder="مثال : 0912123456789" class="h5">
+                                </div>
+                                <div class="form-row-input">
+                                    <label for="" class="h6">موضوع</label>
+                                    <input type="text" name="subject" placeholder="مثال : ساخت واحد سیار" class="h5">
+                                </div>
+                                
+                            </div>
+                           
+                            
+                            <div class="form-row">
+                                <div class="form-row-textarea">
+                                    <label for="" class="h6">توضیحات </label>
+                                    <textarea name="text" class="h5"></textarea>
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-row">
+                                <div class="form-row-btn">
+                                    <input type="submit" value="ثبت" class="h5 bu-btn">
+                                </div>
+                            
+                            </div>
+
+                        </form>
+                    </div>
+               </div>
+                
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        {% include 'parts/footer.html'   %}
+    </body>
+{% endblock %}

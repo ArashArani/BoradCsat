@@ -74,6 +74,7 @@ def main():
 def dashboard():
     date = today()
     order_list = Cart.query.filter(Cart.status == 'Verify').all()
+    consult_list = Consult.query.filter(Consult.status == 'unread').all()
     total_sales = db.session.query(
         func.sum(CartItem.final_price *
                  CartItem.quantity).label('total_revenue')
@@ -87,7 +88,7 @@ def dashboard():
     consult_count = Consult.query.filter(Consult.status == 'unread').count()
     card_count = Card.query.filter(Card.status == "ON").count()
     cart_count = Cart.query.filter(Cart.status == 'Verify').count()
-    return render_template("/admin/dashboard.html", order_list = order_list,card_count=card_count, cart_count=cart_count, user_count=user_count, consult_count=consult_count, course_count=course_count, date=date, total_sales=total_sales)
+    return render_template("/admin/dashboard.html", consult_list = consult_list ,order_list = order_list,card_count=card_count, cart_count=cart_count, user_count=user_count, consult_count=consult_count, course_count=course_count, date=date, total_sales=total_sales)
 
 
 @app.route("/admin/dashboard/courses", methods=['POST', "GET"])

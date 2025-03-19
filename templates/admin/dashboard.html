@@ -216,27 +216,28 @@
                 </div>
                 <div class="admin-content-table-div">
                     <div class="admin-content-table-div-top">
-                        <h4>آخرین خرید ها</h4>
+                        <h4>آخرین مشاوره ها</h4>
                         <a class="h5" href="">همه</a>
                     </div>
                     <div class="admin-content-table-div-body">
-                        <div class="admin-table-row">
-                            <div class="admin-table-row-data-img">
-                                <div>
-                                    <img src="/static/covers/img/masoud.jpg" alt="">
-
+                        {% for i in consult_list %}
+                        
+                            <div class="admin-table-row">
+                               
+                                <div class="admin-table-row-data">
+                                    <h6>{{i.f_name}} {{i.l_name}}</h6>
+                                </div>
+                                <div class="admin-table-row-data">
+                                    <h6>{{i.subject | truncate(10) }}</h6>
+                                </div>
+                                <div class="admin-table-row-data">
+                                    <h6>{{i.persian_status()}}</h6>
+                                </div>
+                                <div class="admin-table-row-data">
+                                    <a href="/admin/dashboard/consults/{{i.id}}" class="h6">تغییر</a>
                                 </div>
                             </div>
-                            <div class="admin-table-row-data">
-                                <h6>آرش آرانی</h6>
-                            </div>
-                            <div class="admin-table-row-data">
-                                <h6>در انتظار تایید</h6>
-                            </div>
-                            <div class="admin-table-row-data">
-                                <a href="" class="h6">تغییر</a>
-                            </div>
-                        </div>
+                        {% endfor %}
                         
                     </div>
                 </div>

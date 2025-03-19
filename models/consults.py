@@ -10,7 +10,9 @@ from extentions import db
 class Consult(db.Model):
     __tablename__="consults"
     id = Column(Integer , primary_key= True)
-    name = Column(VARCHAR)
+    f_name = Column(VARCHAR)
+    l_name = Column(VARCHAR)
+    phone = Column(VARCHAR)
     subject = Column(VARCHAR)
     text = Column(VARCHAR)
     status = Column(VARCHAR) 
