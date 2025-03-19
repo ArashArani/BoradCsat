@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block header %}
     <title>{{blog.name}}</title>
+    <meta name="description" content="{{blog.short_desc | truncate(200)}}">
 {% endblock %}
 {% block body %}
 <body class="user-home">

@@ -10,8 +10,6 @@ from models.cart import Cart
 
 from models.cart_item import CartItem
 
-from models.discount import Discount 
-
 from models.course import Course  
 
 from models.card import Card

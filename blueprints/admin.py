@@ -14,8 +14,6 @@ from models.user import User
 
 from models.consults import Consult
 
-from models.discount import Discount
-
 from models.cart import *
 
 from models.cart_item import CartItem
