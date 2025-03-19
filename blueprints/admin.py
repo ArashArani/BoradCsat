@@ -635,3 +635,32 @@ def consults():
     consult_count = Consult.query.filter(Consult.status == 'unread').count()
     return render_template("/admin/consults.html", date=date, consult_list = consult_list,card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
                                user_count=user_count, consult_count=consult_count)
+
+
+
+@app.route("/admin/dashboard/consults/<int:id>",methods=['POST','GET'])
+def edit_consults(id):
+    date = today()
+    total_sales = db.session.query(
+        func.sum(CartItem.final_price *
+                 CartItem.quantity).label('total_revenue')
+    ).select_from(CartItem) \
+        .join(Cart, CartItem.cart_id == Cart.id) \
+        .join(Course, CartItem.course_id == Course.id) \
+        .filter((Cart.status == 'Approved')) \
+        .scalar() or 0
+    course_count = Course.query.count()
+    user_count = User.query.count()
+    consult = Consult.query.filter(Consult.id == id).first_or_404()
+    card_count = Card.query.filter(Card.status == "ON").count()
+    cart_count = Cart.query.filter(Cart.status == 'Verify').count()
+    consult_count = Consult.query.filter(Consult.status == 'unread').count()
+    if request.method == 'GET':
+        return render_template("/admin/consult-info.html", date=date, consult = consult,card_count=card_count, cart_count=cart_count, total_sales=total_sales, course_count=course_count,
+                                user_count=user_count, consult_count=consult_count)
+    else :
+        status = request.form.get('status')
+        consult.status = status
+        db.session.commit()
+        flash("success",'وضعیت مشاوره با موفقیت تغییر کرد . ')
+        return redirect(url_for("admin.consults"))

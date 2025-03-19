@@ -404,6 +404,12 @@
     cursor: pointer;
     height: 30px;
   }
+  a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--admin-color-black-op);
+  }
 }
 .form-row-textarea {
   width: calc(100% - 2rem);
