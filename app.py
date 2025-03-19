@@ -11,6 +11,7 @@ from flask_migrate import Migrate
 
 #فایل ها 
 
+from blueprints.sitemap import app as sitemap
 
 from blueprints.admin import app as admin
 
@@ -30,6 +31,8 @@ app = Flask(__name__)
 
 
 app.register_blueprint(admin)
+
+app.register_blueprint(sitemap)
 
 app.register_blueprint(general)
 
